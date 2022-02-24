@@ -1,0 +1,38 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "globals": {
+        "JSX": "readonly",
+        "React": "readonly",
+        "NodeJS": "readonly"
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "standard"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        "prettier",
+        "react-hooks"
+    ],
+    "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "no-unused-vars": "warn", // 声明未使用的 ，warn表示警告不报错
+        "no-use-before-define": "off", // react声明但是未被使用
+        "react/react-in-jsx-scope": "off", // 要是用jsx必须引入React
+        "semi": [2, "always"], //语句强制分号结尾
+        "space-before-function-paren": 0
+    }
+}

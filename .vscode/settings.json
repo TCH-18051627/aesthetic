@@ -1,0 +1,27 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+    "editor.fontSize": 14,
+    "workbench.startupEditor": "none",
+    // 每次保存的时候自动格式化 
+    "vetur.validation.template": true,
+    "editor.tabSize": 2,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "html",
+        "vue",
+    ],
+    "eslint.alwaysShowStatus": true,
+    "editor.formatOnSave": true,
+    // 去掉代码结尾的分号 
+    "prettier.semi": false,
+    "files.autoSave": "onFocusChange",
+    "eslint.format.enable": true,
+    "[vue]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    // "files.eol": "\n"
+}
