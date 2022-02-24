@@ -44,3 +44,75 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+```
+aesthetic
+├─ .eslintignore
+├─ .eslintrc.json
+├─ .git
+├─ .gitignore
+├─ .prettierrc
+├─ .vscode
+│  └─ settings.json
+├─ config-overrides.js
+├─ package.json
+├─ paths.json
+├─ public
+│  ├─ favicon.ico
+│  └─ index.html
+├─ README.md
+├─ src
+│  ├─ App.css
+│  ├─ App.test.tsx
+│  ├─ App.tsx
+│  ├─ assets
+│  ├─ components
+│  │  ├─ 404
+│  │  │  ├─ 404.tsx
+│  │  │  └─ style.tsx
+│  │  ├─ Footer
+│  │  │  ├─ Footer.tsx
+│  │  │  └─ style.tsx
+│  │  └─ Header
+│  │     ├─ Header.tsx
+│  │     └─ style.tsx
+│  ├─ containers
+│  ├─ index.css
+│  ├─ index.tsx
+│  ├─ logo.svg
+│  ├─ react-app-env.d.ts
+│  ├─ reportWebVitals.ts
+│  ├─ router
+│  │  ├─ config.js
+│  │  ├─ index.js
+│  │  └─ permissionAuth.js
+│  ├─ setupTests.ts
+│  ├─ store
+│  │  ├─ actions
+│  │  │  ├─ auth.js
+│  │  │  ├─ index.js
+│  │  │  └─ user.js
+│  │  ├─ actionType.js
+│  │  ├─ index.js
+│  │  └─ reducers
+│  │     ├─ index.js
+│  │     └─ user.js
+│  ├─ styles
+│  │  └─ bass.less
+│  ├─ utils
+│  │  ├─ api.js
+│  │  ├─ network.js
+│  │  ├─ url.js
+│  │  └─ valid.js
+│  └─ views
+│     ├─ HomePage
+│     │  ├─ HomePage.tsx
+│     │  └─ style.tsx
+│     └─ LoginPage
+│        ├─ LoginPage.tsx
+│        └─ style.tsx
+├─ tsconfig-base.json
+├─ tsconfig.json
+└─ yarn.lock
+
+```
