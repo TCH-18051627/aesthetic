@@ -2,17 +2,21 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## 首先安装node, 下载最新LTS版本就行
 
-In the project directory, you can run:
+## 安装yarn, `npm install yarn@latest -g`
 
-### `yarn start`
+## 拉取项目后，执行`yarn install`进行依赖包安装
+
+### 执行`yarn start`开启项目
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+## 下面两个先不用管
 
 ### `yarn test`
 
@@ -29,52 +33,43 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 项目目录结构划分，注意每个组件需要包含的文件(index, interface, style)
 
 ```
 aesthetic
-├─ .eslintignore
-├─ .eslintrc.json
+├─ .eslintignore   //  eslint忽略文件配置
+├─ .eslintrc.json   //  eslint配置
 ├─ .git
-├─ .gitignore
-├─ .prettierrc
-├─ .vscode
-│  └─ settings.json
-├─ config-overrides.js
-├─ package.json
-├─ paths.json
+├─ .gitignore    // git忽略配置
+├─ .prettierrc    //  代码格式化配置
+├─ config-overrides.js    // webpack自定义配置
+├─ package.json   // 包管理所需模块及配置信息
+├─ paths.json   // src路径配置
 ├─ public
-│  ├─ favicon.ico
-│  └─ index.html
+│  ├─ favicon.ico   // 图标
+│  └─ index.html    // 入口html文件
 ├─ README.md
 ├─ src
 │  ├─ App.css
 │  ├─ App.test.tsx
 │  ├─ App.tsx
 │  ├─ assets
-│  ├─ components
+│  ├─ components  //  公共组件
 │  │  ├─ 404
-│  │  │  ├─ 404.tsx
+│  │  │  ├─ index.tsx
+│  │  │  ├─ interface.tsx
 │  │  │  └─ style.tsx
 │  │  ├─ Footer
-│  │  │  ├─ Footer.tsx
+│  │  │  ├─ index.tsx
+│  │  │  ├─ interface.tsx
 │  │  │  └─ style.tsx
-│  │  └─ Header
-│  │     ├─ Header.tsx
+│  │  ├─ Header
+│  │  │  ├─ index.tsx
+│  │  │  ├─ interface.tsx
+│  │  │  └─ style.tsx
+│  │  └─ TopTabs
+│  │     ├─ index.tsx
+│  │     ├─ interface.tsx
 │  │     └─ style.tsx
 │  ├─ containers
 │  ├─ index.css
@@ -82,12 +77,12 @@ aesthetic
 │  ├─ logo.svg
 │  ├─ react-app-env.d.ts
 │  ├─ reportWebVitals.ts
-│  ├─ router
-│  │  ├─ config.js
-│  │  ├─ index.js
-│  │  └─ permissionAuth.js
+│  ├─ router  //  路由
+│  │  ├─ config.js    // 项目路由配置
+│  │  ├─ index.js   // 单页面路由注册组件
+│  │  └─ permissionAuth.js    // 登录权限控制组件
 │  ├─ setupTests.ts
-│  ├─ store
+│  ├─ store   
 │  │  ├─ actions
 │  │  │  ├─ auth.js
 │  │  │  ├─ index.js
@@ -98,18 +93,20 @@ aesthetic
 │  │     ├─ index.js
 │  │     └─ user.js
 │  ├─ styles
-│  │  └─ bass.less
-│  ├─ utils
-│  │  ├─ api.js
-│  │  ├─ network.js
-│  │  ├─ url.js
-│  │  └─ valid.js
-│  └─ views
-│     ├─ HomePage
-│     │  ├─ HomePage.tsx
+│  │  └─ bass.scss
+│  ├─ utils   // 工具函数等
+│  │  ├─ api.js   // 统一封装API接口调用方法
+│  │  ├─ network.js   // axios封装与拦截器配置
+│  │  ├─ url.js   // 自动部署服务器环境
+│  │  └─ valid.js   // 统一封装公用模块方法
+│  └─ views   //  主视图页面
+│     ├─ HomePage   // 首页
+│     │  ├─ index.tsx
+│     │  ├─ interface.tsx
 │     │  └─ style.tsx
-│     └─ LoginPage
-│        ├─ LoginPage.tsx
+│     └─ LoginPage    // 登录页面
+│        ├─ index.tsx
+│        ├─ interface.tsx
 │        └─ style.tsx
 ├─ tsconfig-base.json
 ├─ tsconfig.json
