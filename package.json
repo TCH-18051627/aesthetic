@@ -46,6 +46,8 @@
     ]
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@types/lodash": "^4.14.178",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "babel-plugin-import": "^1.13.3",

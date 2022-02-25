@@ -1,5 +1,4 @@
 // import React from 'react';
-import { Button } from 'antd';
 import Header from '@/components/Header';
 import { HomePageWrap } from './style';
 
@@ -10,9 +9,9 @@ export default function HomePage() {
   // };
 
   return (
-    <HomePageWrap>
+    <>
       <Header></Header>
-      <Button>antd-button</Button>
-    </HomePageWrap>
+      <HomePageWrap></HomePageWrap>
+    </>
   );
 }
