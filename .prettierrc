@@ -2,8 +2,6 @@
   "tabWidth": 2,
   "semi": true,
   "singleQuote": true,
-  // 尾后逗号
   "trailingComma": "none",
-  // 取消要求箭头函数的参数必须使用括号
   "arrowParens": "avoid"
 }

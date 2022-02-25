@@ -63,8 +63,9 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.28.0",
     "http-proxy-middleware": "^2.0.3",
-    "less-loader": "6.0.0",
     "prettier": "^2.5.1",
-    "react-app-rewired": "^2.2.1"
+    "react-app-rewired": "^2.2.1",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0"
   }
 }
