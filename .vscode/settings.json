@@ -15,7 +15,7 @@
     "editor.formatOnSave": true,
     // 去掉代码结尾的分号 
     "prettier.semi": false,
-    "files.autoSave": "onFocusChange",
+    "files.autoSave": "off",
     "eslint.format.enable": true,
     "[vue]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
