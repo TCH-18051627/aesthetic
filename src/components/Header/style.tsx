@@ -24,7 +24,7 @@ export const FirstLine = styled.div`
 export const HeaderTitle = styled.div`
   display: inline-flex;
   text-align: left;
-  width: 850px;
+  width: 1350px;
   margin-left: 40px;
   color: #fff;
 `;
