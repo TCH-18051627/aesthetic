@@ -1,6 +1,11 @@
 import styled from 'styled-components';
-import { SearchOutlined, CloudUploadOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
+
+export const LogoIcon = styled.i`
+  font-size: 24px;
+  margin-left: 20px;
+  color: aqua;
+`;
 
 export const HeaderFixedMask = styled.div`
   width: 100%;
@@ -16,7 +21,7 @@ export const HeaderWrap = styled.div`
 export const FirstLine = styled.div`
   display: flex;
   align-items: center;
-  background-color: #323335;
+  background-color: rgba(50, 51, 53, 0.9);
   width: 100%;
   height: 50px;
 `;
@@ -24,17 +29,15 @@ export const FirstLine = styled.div`
 export const HeaderTitle = styled.div`
   display: inline-flex;
   text-align: left;
+  font-size: 16px;
   width: 1350px;
-  margin-left: 40px;
+  margin-left: 20px;
   color: #fff;
 `;
 
-export const SearchIcon = styled(SearchOutlined)`
-  font-size: 20px;
-  width: 28px;
-`;
+export const SearchIcon = styled.i``;
 
-export const CloudUploadIcon = styled(CloudUploadOutlined)`
+export const CloudUploadIcon = styled.i`
   font-size: 34px;
   color: #fff;
 `;

@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { Tabs, Menu, Dropdown } from 'antd';
 import { useNavigate, Link } from 'react-router-dom';
-import { TabsWrap, CommunityTab, AlgorithmTab, UserCenterTab } from './style';
+import {
+  TabsWrap,
+  CommunityTab,
+  AlgorithmTab,
+  UserCenterTab,
+  CommunityIcon,
+  UserCenterIcon,
+  AlgorithmIcon,
+  MenuIcon
+} from './style';
 import { MenuInfo } from './interface';
 
 export default function TopTabs() {
@@ -31,7 +40,10 @@ export default function TopTabs() {
     <Menu onClick={onMenuClick}>
       {algorithmList.map(item => (
         <Menu.Item key={item.key}>
-          <Link to={item.key}>{item.title}</Link>
+          <Link to={item.key}>
+            <MenuIcon className={`iconfont icon-${item.key}`} />
+            {item.title}
+          </Link>
         </Menu.Item>
       ))}
     </Menu>
@@ -39,14 +51,33 @@ export default function TopTabs() {
 
   const DropdownList = (
     <Dropdown overlay={menu} placement="bottomCenter">
-      <AlgorithmTab>算法服务</AlgorithmTab>
+      <AlgorithmTab>
+        <AlgorithmIcon className="iconfont icon-suanfa2" />
+        算法服务
+      </AlgorithmTab>
     </Dropdown>
   );
 
   const tabList = [
-    { key: 'community', tabNode: <CommunityTab>社区</CommunityTab> },
+    {
+      key: 'community',
+      tabNode: (
+        <CommunityTab>
+          <CommunityIcon className="iconfont icon-shequ" />
+          社区
+        </CommunityTab>
+      )
+    },
     { key: 'evaluate', tabNode: DropdownList },
-    { key: 'user', tabNode: <UserCenterTab>个人中心</UserCenterTab> }
+    {
+      key: 'user',
+      tabNode: (
+        <UserCenterTab>
+          <UserCenterIcon className="iconfont icon-gerenzhongxin2" />
+          个人中心
+        </UserCenterTab>
+      )
+    }
   ];
 
   return (
