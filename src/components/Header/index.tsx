@@ -3,6 +3,7 @@ import TopTabs from '../TopTabs';
 import { Button } from 'antd';
 import SearchSelect from '../SearchSelect';
 import {
+  LogoIcon,
   HeaderFixedMask,
   HeaderWrap,
   FirstLine,
@@ -42,10 +43,11 @@ export default function Header() {
     <HeaderFixedMask>
       <HeaderWrap>
         <FirstLine>
+          <LogoIcon className="iconfont icon-photography" />
           <HeaderTitle>图像美学分析系统</HeaderTitle>
           <SearchSelectWrap>
             <Button
-              icon={<SearchIcon />}
+              icon={<SearchIcon className="iconfont icon-fangdajing" />}
               type="text"
               style={SearchButtonStyle}
             />
@@ -60,7 +62,7 @@ export default function Header() {
               style={SearchSelectStyle}
             />
           </SearchSelectWrap>
-          <CloudUploadIcon />
+          <CloudUploadIcon className="iconfont icon-yunshangchuan" />
           <LoginButton type="text">登入</LoginButton>
           <RegisterButton type="primary">注册</RegisterButton>
         </FirstLine>
