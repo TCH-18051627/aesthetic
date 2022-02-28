@@ -1,18 +1,13 @@
 // import { useState } from 'react';
+// import NotFind from './components/NotFind';
+import LoginPage from './views/LoginPage';
 import HomePage from './views/HomePage';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 
 function App() {
-  // const [title, setTitle] = useState<string>('美学评价平台');
-  // const onClick = (v: any) => {
-  //   setTitle('美学分析');
-  // };
-
-  return (
-    <div className="App">
-      <HomePage></HomePage>
-    </div>
-  );
+  const isLogin = true;
+  return <Router>{isLogin ? <HomePage /> : <LoginPage />}</Router>;
 }
 
 export default App;
