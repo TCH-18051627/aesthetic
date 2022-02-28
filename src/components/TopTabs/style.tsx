@@ -5,13 +5,16 @@ export const TabsWrap = styled.div`
 `;
 
 export const CommunityTab = styled.div`
+  text-align: center;
   width: 60px;
 `;
 
 export const AlgorithmTab = styled.div`
+  text-align: center;
   width: 70px;
 `;
 
-export const PersonalTab = styled.div`
+export const UserCenterTab = styled.div`
+  text-align: center;
   width: 70px;
 `;
