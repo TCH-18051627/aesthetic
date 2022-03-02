@@ -10,6 +10,7 @@ export const LogoIcon = styled.i`
 export const HeaderFixedMask = styled.div`
   width: 100%;
   position: fixed;
+  z-index: 20;
 `;
 
 export const HeaderWrap = styled.div`
@@ -21,7 +22,7 @@ export const HeaderWrap = styled.div`
 export const FirstLine = styled.div`
   display: flex;
   align-items: center;
-  background-color: rgba(50, 51, 53, 0.9);
+  background-color: rgba(50, 51, 53, 0.95);
   width: 100%;
   height: 50px;
 `;
