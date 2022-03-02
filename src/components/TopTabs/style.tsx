@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const TabsWrap = styled.div`
-  margin-left: 20px;
+  margin: 0 20px;
+  background-color: #fff;
 `;
 
 export const CommunityTab = styled.div`
