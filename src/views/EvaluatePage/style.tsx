@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Input } from 'antd';
+import { Button, Input, Checkbox } from 'antd';
 
 export const UploadWrap = styled.div`
   display: flex;
@@ -10,7 +10,11 @@ export const UploadWrap = styled.div`
 export const UploadButton = styled(Button)``;
 
 export const ClearButton = styled(Button)`
-  margin: 0 40px;
+  margin: 0 10px;
+`;
+
+export const UIExportButton = styled(Button)`
+  margin: 0 100px;
 `;
 
 export const UIpreviewImg = styled.img`
@@ -18,15 +22,30 @@ export const UIpreviewImg = styled.img`
 `;
 
 export const UIUrlInput = styled(Input)`
+  margin-left: 100px;
   width: 260px;
 `;
 
 export const UIdisplayImg = styled.img`
   width: 360px;
+  margin-left: 15px;
 `;
 
 export const UIChartsWrap = styled.div`
-  width: 30%;
+  width: 400px;
   height: 270px;
   border: none;
+`;
+
+export const UILineWrap = styled.div`
+  display: inline-flex;
+  align-items: center;
+`;
+
+export const UICheckbox = styled(Checkbox)`
+  align-items: center;
+`;
+
+export const UIDownloadButton = styled(Button)`
+  margin: 0 20px;
 `;

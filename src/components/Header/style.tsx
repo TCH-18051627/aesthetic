@@ -68,3 +68,10 @@ export const RegisterButton = styled(Button)`
   height: 34px;
   margin-left: 10px;
 `;
+
+export const UICurPageTitle = styled.div`
+  padding: 0 20px 10px 20px;
+  background-color: #fff;
+  font-size: 30px;
+  box-shadow: 0px 4px 7px -6px #888;
+`;

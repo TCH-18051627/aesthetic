@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import TopTabs from '../TopTabs';
 import { Button } from 'antd';
 import SearchSelect from '../SearchSelect';
+import { useLocation } from 'react-router-dom';
+import { getCurPageTitle } from '@/utils/valid';
 import {
   LogoIcon,
   HeaderFixedMask,
@@ -14,12 +16,14 @@ import {
   SearchSelectStyle,
   SearchSelectWrap,
   LoginButton,
-  RegisterButton
+  RegisterButton,
+  UICurPageTitle
 } from './style';
 import { UserValue } from './interface';
 
 export default function Header() {
   const [value, setValue] = useState<UserValue[]>([]);
+  const location = useLocation();
 
   async function fetchUserList(username: string): Promise<UserValue[]> {
     console.log('fetching user', username);
@@ -67,6 +71,7 @@ export default function Header() {
           <RegisterButton type="primary">注册</RegisterButton>
         </FirstLine>
         <TopTabs></TopTabs>
+        <UICurPageTitle>{getCurPageTitle(location.pathname)}</UICurPageTitle>
       </HeaderWrap>
     </HeaderFixedMask>
   );
