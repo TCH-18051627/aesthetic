@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { List, Upload, message, Modal } from 'antd';
 import EChartsReact from 'echarts-for-react';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
 import { imgScore } from './testData/data';
 import { ImageScoreType } from './interface';
 import { createBarOption, createLineOption } from './utils/createOption';
@@ -11,8 +11,12 @@ import {
   UploadButton,
   UIUrlInput,
   ClearButton,
+  UIExportButton,
+  UILineWrap,
   UIdisplayImg,
-  UIChartsWrap
+  UIChartsWrap,
+  UICheckbox,
+  UIDownloadButton
 } from './style';
 
 export default function EvaluatePage() {
@@ -109,6 +113,16 @@ export default function EvaluatePage() {
     );
   };
 
+  const onDownloadClick = (e: any) => {
+    e.stopPropagation();
+    console.info('下载结果');
+  };
+
+  const handleCheckedChange = (e: any, id: string) => {
+    e.stopPropagation();
+    console.info('checkedValue', e.target, id);
+  };
+
   const UploadHeader = () => {
     return (
       <UploadWrap>
@@ -148,6 +162,10 @@ export default function EvaluatePage() {
           </ClearButton>
 
           <UIUrlInput placeholder="输入图像链接"></UIUrlInput>
+
+          <UIExportButton icon={<DownloadOutlined />}>
+            导出为Excel
+          </UIExportButton>
         </>
         <Modal
           // 模态框是否显示
@@ -173,23 +191,30 @@ export default function EvaluatePage() {
         bordered
         dataSource={imgScore}
         renderItem={(item: ImageScoreType) => (
-          <List.Item>
-            <UIdisplayImg src={item.imageUrl} />
-            <UIChartsWrap>
-              <EChartsReact
-                option={createLineOption({
-                  xData: Object.keys(item.aestheticScores),
-                  yData: Object.values(item.aestheticScores)
-                })}
-              />
-            </UIChartsWrap>
-            <UIChartsWrap>
-              <EChartsReact
-                option={createBarOption({
-                  yData: Object.values(item.aestheticDistributions)
-                })}
-              />
-            </UIChartsWrap>
+          <List.Item key={item.imageId}>
+            <UICheckbox onChange={e => handleCheckedChange(e, item.imageId)}>
+              <UILineWrap>
+                <UIdisplayImg src={item.imageUrl} />
+                <UIChartsWrap>
+                  <EChartsReact
+                    option={createLineOption({
+                      xData: Object.keys(item.aestheticScores),
+                      yData: Object.values(item.aestheticScores)
+                    })}
+                  />
+                </UIChartsWrap>
+                <UIChartsWrap>
+                  <EChartsReact
+                    option={createBarOption({
+                      yData: Object.values(item.aestheticDistributions)
+                    })}
+                  />
+                </UIChartsWrap>
+                <UIDownloadButton onClick={onDownloadClick}>
+                  结果下载
+                </UIDownloadButton>
+              </UILineWrap>
+            </UICheckbox>
           </List.Item>
         )}
       />
