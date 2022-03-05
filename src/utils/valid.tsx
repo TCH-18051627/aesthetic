@@ -9,6 +9,7 @@ export enum CurPageTypeEnum {
 
 export const getCurPageTitle = (curPath: string) => {
   const pageNameList = [
+    { key: '/', title: '个人中心' },
     { key: '/user', title: '个人中心' },
     { key: '/community', title: '社区' },
     { key: '/evaluate', title: '图像美学评价' },
