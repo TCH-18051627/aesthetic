@@ -33,7 +33,10 @@ const NormalLoginForm = () => {
         name="username"
         rules={[{ required: true, message: 'Please input your Username!' }]}
       >
-        <NameInput prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+        <NameInput
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Username"
+        />
       </Form.Item>
       <Form.Item
         name="password"
@@ -52,8 +55,12 @@ const NormalLoginForm = () => {
       </Form.Item>
 
       <Form.Item>
-        <LoginButton type="primary" htmlType="submit" className="login-form-button">
-          登陆
+        <LoginButton
+          type="primary"
+          htmlType="submit"
+          className="login-form-button"
+        >
+          登录
         </LoginButton>
         <br />
         <Register href="">注册</Register>
@@ -66,18 +73,24 @@ const NormalLoginForm = () => {
 };
 
 export default function LoginPage() {
-  return (<Background>
-    <Layout className="layout">
-      <Header>
-        <div className="logo" />
-        <PageHead theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-          {new Array(1).fill(null).map((_, index) => {
-            const key = index + 1;
-            return <Menu.Item key="1"><a href="">图像美学系统</a></Menu.Item>;
-          })}
-        </PageHead>
-      </Header>
-    </Layout>
-    <NormalLoginForm></NormalLoginForm>
-  </Background>);
+  return (
+    <Background>
+      <Layout className="layout">
+        <Header>
+          <div className="logo" />
+          <PageHead theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+            {new Array(1).fill(null).map((_, index) => {
+              const key = index + 1;
+              return (
+                <Menu.Item key="1">
+                  <a href="">图像美学系统</a>
+                </Menu.Item>
+              );
+            })}
+          </PageHead>
+        </Header>
+      </Layout>
+      <NormalLoginForm></NormalLoginForm>
+    </Background>
+  );
 }
