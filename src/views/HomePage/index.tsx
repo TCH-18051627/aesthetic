@@ -18,10 +18,10 @@ export default function HomePage() {
       { path: '/', element: <Navigate to="/user" /> },
       { path: '/community', element: <CommunityPage /> },
       { path: '/user', element: <UserCenterPage /> },
-      { path: 'evaluate', element: <EvaluatePage /> },
-      { path: 'generation', element: <GenerationPage /> },
-      { path: 'enhance', element: <EnhancePage /> },
-      { path: 'classify', element: <ClassifyPage /> },
+      { path: '/evaluate', element: <EvaluatePage /> },
+      { path: '/generation', element: <GenerationPage /> },
+      { path: '/enhance', element: <EnhancePage /> },
+      { path: '/classify', element: <ClassifyPage /> },
       // 重定向
       // { path: 'home', element: <Navigate to="/"></Navigate> },
       // 404找不到
