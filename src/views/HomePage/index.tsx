@@ -8,14 +8,14 @@ import ClassifyPage from '@/views/ClassifyPage';
 import EnhancePage from '@/views/EnhancePage';
 import EvaluatePage from '@/views/EvaluatePage';
 import GenerationPage from '@/views/GenerationPage';
-import { useRoutes } from 'react-router-dom';
+import { useRoutes, Navigate } from 'react-router-dom';
 import { HomePageWrap } from './style';
 
 export default function HomePage() {
   const GetRoutes = () => {
     // const isLogin = true;
     const routes = useRoutes([
-      { path: '/', element: <UserCenterPage /> },
+      { path: '/', element: <Navigate to="/user" /> },
       { path: '/community', element: <CommunityPage /> },
       { path: '/user', element: <UserCenterPage /> },
       { path: 'evaluate', element: <EvaluatePage /> },
