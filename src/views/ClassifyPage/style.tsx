@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { List, Button, Input, Checkbox, Collapse, Tag } from 'antd';
+import { List, Button, Input, Checkbox, Collapse, Tag, Tabs } from 'antd';
 
 export const UIListHeader = styled(List)`
   border-bottom: none;
@@ -8,20 +8,39 @@ export const UIListHeader = styled(List)`
 
 export const UICollapse = styled(Collapse)`
   margin-top: -1px;
-  border-radius: 0 0 2px 2px;
+  border-radius: 0;
 `;
 
 export const UIListBodyStyle = { border: 'none', padding: '0' };
+
+export const UIListItemStyle = { padding: '0', margin: '0' };
+
+export const UIdisplayImg = styled.img`
+  width: 240px;
+  height: 220px;
+`;
+
+export const UIChartsWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 20px;
+  width: 200px;
+  height: 220px;
+  border: none;
+  flex-flow: wrap;
+`;
 
 export const UIAttriButeTag = styled(Tag)`
   display: flex;
   justify-content: center;
   color: #fff;
-  padding-top: 8px;
-  font-size: 32px;
-  line-height: 32px;
-  height: 60px;
-  width: 280px;
+  padding-top: 4px;
+  font-size: 16px;
+  line-height: 16px;
+  height: 32px;
+  width: 144px;
   border: 2px solid #3d5d96;
   border-radius: 8px;
 `;
@@ -51,22 +70,6 @@ export const UIUrlInput = styled(Input)`
   width: 260px;
 `;
 
-export const UIdisplayImg = styled.img`
-  width: 360px;
-  margin-left: 15px;
-`;
-
-export const UIChartsWrap = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-left: 30px;
-  width: 700px;
-  height: 270px;
-  border: none;
-  flex-flow: wrap;
-`;
-
 export const UILineWrap = styled.div`
   display: inline-flex;
   align-items: center;
@@ -78,4 +81,70 @@ export const UICheckbox = styled(Checkbox)`
 
 export const UIDownloadButton = styled(Button)`
   margin: 0 20px;
+`;
+
+export const UIImageTabs = styled(Tabs)`
+  border: 1px solid #d9d9d9;
+  border-top: none;
+  .ant-tabs-nav {
+    margin: 0 0 4px 0;
+  }
+`;
+
+export const UIImgCol = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  :after {
+    content: ' ';
+    flex-grow: 99999;
+  }
+`;
+
+export const UIImgWrap = styled.div`
+  flex-grow: 1;
+  margin: 2px;
+  position: relative;
+  overflow: hidden;
+
+  :hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: all 0.4s;
+  }
+`;
+
+export const UIImgItem = styled.img`
+  height: 160px;
+  min-width: 100%;
+  object-fit: cover;
+`;
+
+export const UIHover = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: all 0.4s;
+
+  :hover {
+    background-color: #4d4d4d4c;
+  }
+  :hover .text {
+    transition: all 0.4s;
+    opacity: 1;
+  }
+`;
+
+export const UIHoverText = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  /* height: 0; */
 `;
