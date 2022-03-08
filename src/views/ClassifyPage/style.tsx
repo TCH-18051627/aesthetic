@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { List, Button, Input, Checkbox, Collapse, Tag, Tabs, Col } from 'antd';
+import { List, Button, Input, Checkbox, Collapse, Tag, Tabs } from 'antd';
 
 export const UIListHeader = styled(List)`
   border-bottom: none;
@@ -105,6 +105,13 @@ export const UIImgWrap = styled.div`
   flex-grow: 1;
   margin: 2px;
   position: relative;
+  overflow: hidden;
+
+  :hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: all 0.4s;
+  }
 `;
 
 export const UIImgItem = styled.img`

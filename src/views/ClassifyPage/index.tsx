@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  List,
-  Card,
-  Upload,
-  message,
-  Modal,
-  Collapse,
-  Tabs,
-  Row,
-  Col
-} from 'antd';
+import { List, Card, Upload, message, Modal, Collapse, Tabs } from 'antd';
 import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
 import { imgScore, attrList } from './testData/data';
 import { ImageAttributesType, AttrImgListType } from './interface';
