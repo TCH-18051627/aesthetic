@@ -7,8 +7,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 
 function App() {
-  const isLogin = false;
-  return <Router>{isLogin ? <HomePage /> : <RegisterPage />}</Router>;
+  const isLogin = true;
+  return <Router>{isLogin ? <HomePage /> : <LoginPage />}</Router>;
 }
 
 export default App;
