@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { List, Upload, message, Modal, Collapse } from 'antd';
+import {
+  List,
+  Card,
+  Upload,
+  message,
+  Modal,
+  Collapse,
+  Tabs,
+  Row,
+  Col
+} from 'antd';
 import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
-import { imgScore } from './testData/data';
-import { ImageAttributesType } from './interface';
+import { imgScore, attrList } from './testData/data';
+import { ImageAttributesType, AttrImgListType } from './interface';
 import {
   UIListHeader,
   UploadWrap,
@@ -18,10 +28,19 @@ import {
   UIDownloadButton,
   UICollapse,
   UIListBodyStyle,
-  UIAttriButeTag
+  UIListItemStyle,
+  UIAttriButeTag,
+  UIImageTabs,
+  UIImgWrap,
+  UIImgItem,
+  UIImgCol,
+  UIHover,
+  UIHoverText
 } from './style';
 
 const { Panel } = Collapse;
+const { TabPane } = Tabs;
+const style = { background: '#0092ff', padding: '8px' };
 
 export default function EvaluatePage() {
   const getBase64 = (file: File) => {
@@ -117,16 +136,6 @@ export default function EvaluatePage() {
     );
   };
 
-  const onDownloadClick = (e: any) => {
-    e.stopPropagation();
-    console.info('下载结果');
-  };
-
-  const handleCheckedChange = (e: any, id: string) => {
-    e.stopPropagation();
-    console.info('checkedValue', e.target, id);
-  };
-
   const UploadHeader = () => {
     return (
       <UploadWrap>
@@ -188,20 +197,48 @@ export default function EvaluatePage() {
     );
   };
 
+  const ImageTabList = () => {
+    return (
+      <UIImageTabs type="card" size="large">
+        {attrList.map(item => (
+          <TabPane tab={item.Label} key={item.attrId}>
+            <UIImgCol>
+              {item.imageList.map(itemUrl => (
+                <UIImgWrap key={itemUrl}>
+                  <UIImgItem src={itemUrl} />
+                  <UIHover>
+                    <UIHoverText className="text">hover效果</UIHoverText>
+                  </UIHover>
+                </UIImgWrap>
+              ))}
+              {item.imageList.map(itemUrl => (
+                <UIImgWrap key={itemUrl}>
+                  <UIImgItem src={itemUrl} />
+                  <UIHover>
+                    <UIHoverText className="text">hover效果</UIHoverText>
+                  </UIHover>
+                </UIImgWrap>
+              ))}
+            </UIImgCol>
+          </TabPane>
+        ))}
+      </UIImageTabs>
+    );
+  };
+
   return (
     <>
-      <UIListHeader header={UploadHeader()} bordered dataSource={imgScore} />
+      <UIListHeader header={UploadHeader()} bordered dataSource={['1']} />
       <UICollapse>
         <Panel header="查看每种属性样例" key="1">
           <List
             bordered
             dataSource={imgScore}
             style={UIListBodyStyle}
+            grid={{ gutter: 16, column: 3 }}
             renderItem={(item: ImageAttributesType) => (
-              <List.Item key={item.imageId}>
-                <UICheckbox
-                  onChange={e => handleCheckedChange(e, item.imageId)}
-                >
+              <List.Item key={item.imageId} style={UIListItemStyle}>
+                <Card>
                   <UILineWrap>
                     <UIdisplayImg src={item.imageUrl} />
                     <UIChartsWrap>
@@ -211,16 +248,14 @@ export default function EvaluatePage() {
                         </UIAttriButeTag>
                       ))}
                     </UIChartsWrap>
-                    <UIDownloadButton onClick={onDownloadClick}>
-                      结果下载
-                    </UIDownloadButton>
                   </UILineWrap>
-                </UICheckbox>
+                </Card>
               </List.Item>
             )}
           />
         </Panel>
       </UICollapse>
+      {ImageTabList()}
     </>
   );
 }

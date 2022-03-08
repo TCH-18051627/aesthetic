@@ -18,3 +18,9 @@ export interface ImageAttributesType {
   aestheticDistributions: number[];
   aestheticAttributes: AttributesLabelType[];
 }
+
+export interface AttrImgListType {
+  Label: string;
+  attrId: string;
+  imageList: string[];
+}
