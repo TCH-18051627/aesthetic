@@ -1,5 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function CommunityPage() {
-  return <div>社区</div>;
+  return <h1>社区</h1>;
 }
