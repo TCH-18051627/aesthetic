@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { List, Card, Upload, message, Modal, Collapse, Tabs } from 'antd';
 import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
 import { imgScore, attrList } from './testData/data';
-import { ImageAttributesType, AttrImgListType } from './interface';
+import { ImageAttributesType } from './interface';
 import {
   UIListHeader,
   UploadWrap,
@@ -14,8 +14,6 @@ import {
   UILineWrap,
   UIdisplayImg,
   UIChartsWrap,
-  UICheckbox,
-  UIDownloadButton,
   UICollapse,
   UIListBodyStyle,
   UIListItemStyle,
@@ -30,9 +28,8 @@ import {
 
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
-const style = { background: '#0092ff', padding: '8px' };
 
-export default function EvaluatePage() {
+export default function ClassifyPage() {
   const getBase64 = (file: File) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -46,15 +43,15 @@ export default function EvaluatePage() {
   );
 
   // 遮罩层的开关state
-  const [previewVisible, setpreviewVisible] = useState(false);
+  const [previewVisible, setpreviewVisible] = useState<boolean>(false);
   // 遮罩层打开后显示的图片
-  const [previewImage, setpreviewImage] = useState('');
+  const [previewImage, setpreviewImage] = useState<string>('');
   // 遮罩层打开后显示的标题
-  const [previewTitle, setpreviewTitle] = useState('');
+  const [previewTitle, setpreviewTitle] = useState<string>('');
   // 上传图片左侧弹出的列表 默认number[]
   const [fileList, setFileList] = useState([]);
   // 上传中...加载状态.....
-  const [upImgloading, setUpImgloading] = useState(false);
+  const [upImgloading, setUpImgloading] = useState<boolean>(false);
 
   // 判断上传图片拦截方法
   const handleChange = ({ file, fileList }: any) => {
