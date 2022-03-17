@@ -14,10 +14,31 @@ import {
   Background,
   RememberMe
 } from './style';
+import { useAuth } from '@/utils/auth';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { setIsLogin } from '@/store/reducers/loginInfo';
+import { useDispatch } from 'react-redux';
 
 const { Header } = Layout;
 
 export default function LoginPage() {
+  const { signIn } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const state: any = location.state;
+  const from = state ? state.from : '/';
+
+  const onLoginClick = () => {
+    signIn();
+    dispatch(setIsLogin(true));
+    navigate(from);
+  };
+
+  const onRegisterClick = () => {
+    navigate('/register');
+  };
+
   // 登陆表单
   const NormalLoginForm = () => {
     const onFinish = (values: any) => {
@@ -53,11 +74,13 @@ export default function LoginPage() {
         </Form.Item>
 
         <Form.Item>
-          <LoginButton type="primary" htmlType="submit">
+          <LoginButton type="primary" htmlType="submit" onClick={onLoginClick}>
             登录
           </LoginButton>
           <UIFooterWrap>
-            <Register type="text">注册</Register>
+            <Register type="text" onClick={onRegisterClick}>
+              注册
+            </Register>
             <ForgetPassword type="text">忘记密码</ForgetPassword>
           </UIFooterWrap>
         </Form.Item>
