@@ -1,6 +1,7 @@
 // 使用local-storage存储历史搜索相关数据
 // 需要长期存储的业务数据需要使用本地local-storage
 import storage from 'good-storage';
+import React, { ReactNode, LazyExoticComponent } from 'react';
 
 export function save(item, key, compare, maxLen) {
   // 读出现有元素,如果没有存储过key,默认空数组[]
@@ -40,7 +41,6 @@ function insertArray(arr, val, compare, maxLen) {
     return;
   }
   if (index > 0) {
-    // 如果列表中已有这首歌，则先把它删掉再调到队首
     arr.splice(index, 1);
   }
   arr.unshift(val);
@@ -82,4 +82,10 @@ export const getCurPageTitle = (curPath: string) => {
   });
 
   return pageNameList[curIndex].title;
+};
+
+export const lazyLoad = (
+  Node: React.LazyExoticComponent<() => JSX.Element>
+) => {
+  return <Node />;
 };

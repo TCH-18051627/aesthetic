@@ -1,3 +1,5 @@
+import { USER_ROLE_ENUM } from '@/store/constants';
+
 export interface UserStateType {
   // 登录用户id
   userId: string;
@@ -13,4 +15,6 @@ export interface UserStateType {
   loading?: boolean;
   // error信息
   error?: string | null;
+  // 角色
+  role: USER_ROLE_ENUM;
 }

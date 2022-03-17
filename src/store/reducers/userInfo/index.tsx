@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { load } from '@/utils/valid';
 import { SEARCH_KEY } from '@/assets/js/constant';
+import { USER_ROLE_ENUM } from '@/store/constants';
 import { RootState } from '../../index'; // 在 store/index.ts 中声明的类型
 import { getUserInfoById } from '@/service/userInfo';
 import { UserStateType } from './interface';
@@ -19,7 +20,9 @@ const defaultState: UserStateType = {
   // 页面加载
   loading: false,
   // 错误信息
-  error: ''
+  error: '',
+  // 角色
+  role: USER_ROLE_ENUM.GUEST
 };
 
 export const getUserInfo = createAsyncThunk(
@@ -48,11 +51,23 @@ const userInfoSlice = createSlice({
     setAge: (state, action: PayloadAction<string>) => {
       state.age = action.payload;
     },
+    setRole: (state, action: PayloadAction<USER_ROLE_ENUM>) => {
+      state.role = action.payload;
+    },
     setSearchHistory: (state, action: PayloadAction<string>) => {
       state.searchHistory = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
+    },
+    initUserState: state => {
+      state.userId = '';
+      state.phoneNumber = '';
+      state.email = '';
+      state.age = '';
+      state.searchHistory = '';
+      state.loading = false;
+      state.role = USER_ROLE_ENUM.GUEST;
     }
   },
   // 异步 thunk，用于需要在更新数据前异步处理数据(接口请求属于异步任务，异步请求后对数据进行保存)的情况
@@ -64,7 +79,6 @@ const userInfoSlice = createSlice({
       state,
       action: PayloadAction<UserStateType>
     ) => {
-      console.info(action);
       state.userId = action.payload.userId;
       state.phoneNumber = action.payload.phoneNumber;
       state.email = action.payload.email;
@@ -82,8 +96,16 @@ const userInfoSlice = createSlice({
 });
 
 // Action Creator 用于执行返回描述如何更新 state 的 Action
-export const { setUserId, setPhoneNumber, setEmail, setAge, setSearchHistory } =
-  userInfoSlice.actions;
+export const {
+  setUserId,
+  setPhoneNumber,
+  setEmail,
+  setAge,
+  setRole,
+  setSearchHistory,
+  setLoading,
+  initUserState
+} = userInfoSlice.actions;
 
 // Selector，作为 useSelector 读取数据的函数参数
 export const userInfoSelector = (state: RootState) => state.userInfo;

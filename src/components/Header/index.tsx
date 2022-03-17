@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import TopTabs from '../TopTabs';
 import { Button } from 'antd';
 import SearchSelect from '../SearchSelect';
-import { useLocation } from 'react-router-dom';
+import { setIsLogin } from '@/store/reducers/loginInfo';
+import { useDispatch } from 'react-redux';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getCurPageTitle } from '@/utils/valid';
 import {
   LogoIcon,
@@ -16,7 +18,6 @@ import {
   SearchSelectStyle,
   SearchSelectWrap,
   LoginButton,
-  RegisterButton,
   UICurPageTitle
 } from './style';
 import { UserValue } from './interface';
@@ -24,6 +25,13 @@ import { UserValue } from './interface';
 export default function Header() {
   const [value, setValue] = useState<UserValue[]>([]);
   const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onLoginOutClick = () => {
+    dispatch(setIsLogin(false));
+    navigate('/login');
+  };
 
   async function fetchUserList(username: string): Promise<UserValue[]> {
     console.log('fetching user', username);
@@ -67,8 +75,9 @@ export default function Header() {
             />
           </SearchSelectWrap>
           <CloudUploadIcon className="iconfont icon-yunshangchuan" />
-          <LoginButton type="text">登入</LoginButton>
-          <RegisterButton type="primary">注册</RegisterButton>
+          <LoginButton type="text" onClick={onLoginOutClick}>
+            登出
+          </LoginButton>
         </FirstLine>
         <TopTabs></TopTabs>
         <UICurPageTitle>{getCurPageTitle(location.pathname)}</UICurPageTitle>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Menu, Form, InputNumber } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import {
   Background,
   PageHead,
@@ -14,6 +15,8 @@ import {
 } from './style';
 
 export default function RegisterPage() {
+  const navigate = useNavigate();
+
   // 注册表单
   const { Header } = Layout;
   const layout = {
@@ -34,20 +37,41 @@ export default function RegisterPage() {
   };
   /* eslint-enable no-template-curly-in-string */
 
+  const onLoginClick = () => {
+    navigate('/login');
+  };
+
   const Demo = () => {
     const onFinish = (values: any) => {
       console.log(values);
     };
 
     return (
-      <RegisterForm {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-        <NameItem name={['user', 'name']} label="姓名" rules={[{ required: true }]}>
+      <RegisterForm
+        {...layout}
+        name="nest-messages"
+        onFinish={onFinish}
+        validateMessages={validateMessages}
+      >
+        <NameItem
+          name={['user', 'name']}
+          label="姓名"
+          rules={[{ required: true }]}
+        >
           <NormalInput />
         </NameItem>
-        <FormItem name={['user', 'email']} label="邮箱" rules={[{ type: 'email' }]}>
+        <FormItem
+          name={['user', 'email']}
+          label="邮箱"
+          rules={[{ type: 'email' }]}
+        >
           <NormalInput />
         </FormItem>
-        <FormItem name={['user', 'age']} label="年龄" rules={[{ type: 'number', min: 0, max: 99 }]}>
+        <FormItem
+          name={['user', 'age']}
+          label="年龄"
+          rules={[{ type: 'number', min: 0, max: 99 }]}
+        >
           <InputNumber />
         </FormItem>
         <FormItem name={['user', 'password']} label="密码">
@@ -62,7 +86,10 @@ export default function RegisterPage() {
           </RegisterButton>
         </Form.Item>
         <UIFooterWrap>
-          如果您已注册?<Login type="text">单击这里登陆</Login>
+          如果您已注册?
+          <Login type="text" onClick={onLoginClick}>
+            单击这里登陆
+          </Login>
         </UIFooterWrap>
       </RegisterForm>
     );
