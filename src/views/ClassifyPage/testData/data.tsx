@@ -57,18 +57,93 @@ export const imgScore = [
 
 export const attrList = [
   {
-    Label: 'light',
+    label: 'light',
     attrId: '0',
-    imageList: [image1, image2, image3, image4, image5, image6]
+    imageList: [
+      { imgUrl: image1, id: '0' },
+      { imgUrl: image2, id: '1' },
+      { imgUrl: image4, id: '2' },
+      { imgUrl: image3, id: '3' },
+      { imgUrl: image6, id: '4' },
+      { imgUrl: image5, id: '5' },
+      { imgUrl: image6, id: '6' },
+      { imgUrl: image2, id: '7' },
+      { imgUrl: image1, id: '8' },
+      { imgUrl: image3, id: '9' },
+      { imgUrl: image5, id: '10' },
+      { imgUrl: image4, id: '11' },
+      { imgUrl: image1, id: '12' },
+      { imgUrl: image2, id: '13' },
+      { imgUrl: image4, id: '14' },
+      { imgUrl: image3, id: '15' },
+      { imgUrl: image6, id: '16' },
+      { imgUrl: image5, id: '17' },
+      { imgUrl: image6, id: '18' },
+      { imgUrl: image2, id: '19' },
+      { imgUrl: image1, id: '20' },
+      { imgUrl: image3, id: '21' },
+      { imgUrl: image5, id: '22' },
+      { imgUrl: image4, id: '23' }
+    ]
   },
   {
-    Label: 'Content',
+    label: 'Content',
     attrId: '1',
-    imageList: [image2, image4, image5, image1, image3, image6]
+    imageList: [
+      { imgUrl: image1, id: '0' },
+      { imgUrl: image2, id: '1' },
+      { imgUrl: image4, id: '2' },
+      { imgUrl: image3, id: '3' },
+      { imgUrl: image6, id: '4' },
+      { imgUrl: image5, id: '5' },
+      { imgUrl: image6, id: '6' },
+      { imgUrl: image2, id: '7' },
+      { imgUrl: image1, id: '8' },
+      { imgUrl: image3, id: '9' },
+      { imgUrl: image5, id: '10' },
+      { imgUrl: image4, id: '11' },
+      { imgUrl: image1, id: '12' },
+      { imgUrl: image2, id: '13' },
+      { imgUrl: image4, id: '14' },
+      { imgUrl: image3, id: '15' },
+      { imgUrl: image6, id: '16' },
+      { imgUrl: image5, id: '17' },
+      { imgUrl: image6, id: '18' },
+      { imgUrl: image2, id: '19' },
+      { imgUrl: image1, id: '20' },
+      { imgUrl: image3, id: '21' },
+      { imgUrl: image5, id: '22' },
+      { imgUrl: image4, id: '23' }
+    ]
   },
   {
-    Label: 'Object',
+    label: 'Object',
     attrId: '2',
-    imageList: [image1, image3, image5, image6, image4, image2]
+    imageList: [
+      { imgUrl: image1, id: '0' },
+      { imgUrl: image2, id: '1' },
+      { imgUrl: image4, id: '2' },
+      { imgUrl: image3, id: '3' },
+      { imgUrl: image6, id: '4' },
+      { imgUrl: image5, id: '5' },
+      { imgUrl: image6, id: '6' },
+      { imgUrl: image2, id: '7' },
+      { imgUrl: image1, id: '8' },
+      { imgUrl: image3, id: '9' },
+      { imgUrl: image5, id: '10' },
+      { imgUrl: image4, id: '11' },
+      { imgUrl: image1, id: '12' },
+      { imgUrl: image2, id: '13' },
+      { imgUrl: image4, id: '14' },
+      { imgUrl: image3, id: '15' },
+      { imgUrl: image6, id: '16' },
+      { imgUrl: image5, id: '17' },
+      { imgUrl: image6, id: '18' },
+      { imgUrl: image2, id: '19' },
+      { imgUrl: image1, id: '20' },
+      { imgUrl: image3, id: '21' },
+      { imgUrl: image5, id: '22' },
+      { imgUrl: image4, id: '23' }
+    ]
   }
 ];

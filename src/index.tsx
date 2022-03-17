@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/lib/locale/zh_CN';
 import reportWebVitals from './reportWebVitals';
 import './assets/fonts/iconfont.css';
 import { Provider } from 'react-redux';
@@ -10,7 +12,9 @@ import store from './store';
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <ConfigProvider locale={zhCN}>
+        <App />
+      </ConfigProvider>
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')

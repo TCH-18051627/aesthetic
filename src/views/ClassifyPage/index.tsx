@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { List, Card, Upload, message, Modal, Collapse, Tabs } from 'antd';
+import {
+  List,
+  Card,
+  Upload,
+  message,
+  Modal,
+  Collapse,
+  Tabs,
+  Pagination
+} from 'antd';
 import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
 import { imgScore, attrList } from './testData/data';
 import { ImageAttributesType } from './interface';
@@ -21,9 +30,11 @@ import {
   UIImageTabs,
   UIImgWrap,
   UIImgItem,
+  UIImgPageWrap,
   UIImgCol,
   UIHover,
-  UIHoverText
+  UIHoverText,
+  UIPaginationWrap
 } from './style';
 
 const { Panel } = Collapse;
@@ -38,7 +49,7 @@ export default function ClassifyPage() {
       reader.onerror = error => reject(error);
     });
   };
-  const [ImageUrl, setImageUrl] = useState(
+  const [imageUrl, setImageUrl] = useState(
     'http://vueshop.glbuys.com/userfiles/head/590472285.jpeg'
   );
 
@@ -52,6 +63,10 @@ export default function ClassifyPage() {
   const [fileList, setFileList] = useState([]);
   // 上传中...加载状态.....
   const [upImgloading, setUpImgloading] = useState<boolean>(false);
+  // 图片数据分页初始index
+  const [preIndex, setPreIndex] = useState<number>(0);
+  // 图片数据分页结尾index
+  const [nextIndex, setNextIndex] = useState<number>(15);
 
   // 判断上传图片拦截方法
   const handleChange = ({ file, fileList }: any) => {
@@ -68,9 +83,9 @@ export default function ClassifyPage() {
 
     // 判断图片大小是否小于等于50k
     // 1默认为bit 最小单位
-    // 1k = 1b * 1024 b
-    // 1m = 1k * 1024 k
-    const isLt50K = file.size <= 50 * 1024;
+    // 1k = 1b * 624 b
+    // 1m = 1k * 624 k
+    const isLt50K = file.size <= 50 * 624;
     if (!isLt50K) {
       message.error('文件大小不得超过50k!');
       return isLt50K;
@@ -123,6 +138,16 @@ export default function ClassifyPage() {
     );
   };
 
+  const handlePageChange = (value: number) => {
+    if (value <= 1) {
+      setPreIndex(0);
+      setNextIndex(15);
+    } else {
+      setPreIndex((value - 1) * 15);
+      setNextIndex((value - 1) * 15 + 15);
+    }
+  };
+
   const UploadHeader = () => {
     return (
       <UploadWrap>
@@ -130,7 +155,7 @@ export default function ClassifyPage() {
           <Upload
             name="headfile"
             // 图片上传服务器地址
-            action="http://vueshop.glbuys.com/api/user/myinfo/formdatahead?token=1ec949a15fb709370f"
+            action="http://vueshop.glbuys.com/api/user/myinfo/formdatahead?token=1ec949a15fb709670f"
             // 图片上传类型
             // listType="picture-card"
             // 上传列表
@@ -188,25 +213,33 @@ export default function ClassifyPage() {
     return (
       <UIImageTabs type="card" size="large">
         {attrList.map(item => (
-          <TabPane tab={item.Label} key={item.attrId}>
-            <UIImgCol>
-              {item.imageList.map(itemUrl => (
-                <UIImgWrap key={itemUrl}>
-                  <UIImgItem src={itemUrl} />
-                  <UIHover>
-                    <UIHoverText className="text">hover效果</UIHoverText>
-                  </UIHover>
-                </UIImgWrap>
-              ))}
-              {item.imageList.map(itemUrl => (
-                <UIImgWrap key={itemUrl}>
-                  <UIImgItem src={itemUrl} />
-                  <UIHover>
-                    <UIHoverText className="text">hover效果</UIHoverText>
-                  </UIHover>
-                </UIImgWrap>
-              ))}
-            </UIImgCol>
+          <TabPane tab={item.label} key={item.attrId}>
+            <UIImgPageWrap>
+              <UIImgCol>
+                {item.imageList
+                  .slice(preIndex, Math.min(item.imageList.length, nextIndex))
+                  .map(itemImg => (
+                    <UIImgWrap key={itemImg.id}>
+                      <UIImgItem src={itemImg.imgUrl} />
+                      <UIHover>
+                        <UIHoverText className="text">hover效果</UIHoverText>
+                      </UIHover>
+                    </UIImgWrap>
+                  ))}
+              </UIImgCol>
+              <UIPaginationWrap>
+                <Pagination
+                  size="small"
+                  defaultCurrent={1}
+                  defaultPageSize={15}
+                  onChange={handlePageChange}
+                  total={item.imageList.length}
+                  showSizeChanger
+                  showQuickJumper
+                  showTotal={total => `共 ${total} 张`}
+                />
+              </UIPaginationWrap>
+            </UIImgPageWrap>
           </TabPane>
         ))}
       </UIImageTabs>

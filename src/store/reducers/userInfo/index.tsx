@@ -3,9 +3,9 @@ import { load } from '@/utils/valid';
 import { SEARCH_KEY } from '@/assets/js/constant';
 import { RootState } from '../../index'; // 在 store/index.ts 中声明的类型
 import { getUserInfoById } from '@/service/userInfo';
-import { userStateType } from './interface';
+import { UserStateType } from './interface';
 
-const defaultState: userStateType = {
+const defaultState: UserStateType = {
   // 登录用户id
   userId: '',
   // 登录用户手机号码
@@ -62,7 +62,7 @@ const userInfoSlice = createSlice({
     },
     [getUserInfo.fulfilled.type]: (
       state,
-      action: PayloadAction<userStateType>
+      action: PayloadAction<UserStateType>
     ) => {
       console.info(action);
       state.userId = action.payload.userId;
