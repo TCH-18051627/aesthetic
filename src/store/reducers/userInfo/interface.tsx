@@ -1,4 +1,4 @@
-export interface userStateType {
+export interface UserStateType {
   // 登录用户id
   userId: string;
   // 登录用户手机号码
