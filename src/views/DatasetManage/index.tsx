@@ -25,7 +25,10 @@ import {
   PaginationStyle
 }
   from './style';
+
 const { Meta } = Card;
+
+// 顶部导航栏,导航栏点击按钮可以改变全局props值
 const TopHeader = (props) => {
   const p = props;
   function changeCollapsed() {
@@ -65,6 +68,7 @@ const TopHeader = (props) => {
   );
 };
 
+// 侧边栏,根据全局props控制是否展开侧边栏
 const SideMenu = (props) => {
   const p = props;
   return (
@@ -94,6 +98,7 @@ const SideMenu = (props) => {
   );
 };
 
+// 图片内容展示
 const MidContent = () => {
   const menu = (
     <Menu >
@@ -108,6 +113,7 @@ const MidContent = () => {
       </Menu.Item>
     </Menu>
   );
+  // 图片对象
   const initialState = [
     {
       imgurl: 'https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png',
