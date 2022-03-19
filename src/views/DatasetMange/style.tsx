@@ -22,47 +22,6 @@ export const AddButton = styled(Button)`
   margin-left:100px ;
 `;
 
-export const HeaderStyle = styled(Header)`
-  padding: 0px 16px ;
-  background: rgb(88, 157, 248); 
-  .anticon-menu-unfold,.anticon-menu-fold{
-    color:white;
-    float:left;
-    margin-top:25px;
-  }
-  .ant-breadcrumb{
-    width: 150px;
-    height:64px;
-    line-height:64px;
-    float: left;
-    margin-left:10px;
-  }
-  .ant-dropdown-trigger{
-    color:white;
-    float: right;
-  }
-`;
-
-export const LayoutStyle = styled(Layout)`
-  height:100%;
-`;
-
-export const SiderStyle = styled(Sider)`
-  .logo{
-    height: 64px;
-    line-height: 64px;
-    background-color:white;
-    font-size: 14px;
-    text-align: center;
-    overflow:hidden;
-  }
-  ul{
-    height:100%;
-  }
-  ul svg{
-    color:rgb(106, 151, 188)
-  }
-`;
 
 export const ContentStyle = styled(Content)`
   background-color:white;
