@@ -1,25 +1,13 @@
 import { useState } from 'react';
-import { Layout, Menu, Dropdown, Breadcrumb, Card, List } from 'antd';
+import { Layout, Menu, Dropdown, Card, List } from 'antd';
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  DownOutlined,
-  HomeOutlined,
-  PictureOutlined,
-  CodepenCircleOutlined,
-  CloudSyncOutlined,
-  ShopFilled,
-  SketchCircleFilled
+  DownOutlined
 } from '@ant-design/icons';
 import {
   AlgorithmButton,
   DataInput,
   AddButton,
   SearchButton,
-  HeaderStyle,
-  LayoutStyle,
-  SiderStyle,
   ContentStyle,
   CardStyle,
   PaginationStyle
@@ -27,79 +15,8 @@ import {
   from './style';
 
 const { Meta } = Card;
-
-// 顶部导航栏,导航栏点击按钮可以改变全局props值,props用于控制侧边栏展开
-const TopHeader = (props) => {
-  const p = props;
-  function changeCollapsed() {
-    p.setstate(!p.state);
-  };
-
-  const menu = (
-    <Menu>
-      <Menu.Item>
-        111
-      </Menu.Item>
-      <Menu.Item>
-        222
-      </Menu.Item>
-      <Menu.Item danger>exit</Menu.Item>
-    </Menu>
-  );
-  return (
-    <HeaderStyle>
-      {
-        p.state ? <MenuUnfoldOutlined onClick={() => changeCollapsed()} /> : <MenuFoldOutlined onClick={() => changeCollapsed()} />
-      }
-      <Breadcrumb >
-        <Breadcrumb.Item>
-          <a href="">数据集</a>
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>
-          <a href=''>数据集列表</a>
-        </Breadcrumb.Item>
-      </Breadcrumb>
-      <Dropdown overlay={menu}>
-        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-          <UserOutlined />Hover<DownOutlined />
-        </a>
-      </Dropdown>
-    </HeaderStyle>
-  );
-};
-
-// 侧边栏,根据全局props控制是否展开侧边栏
-const SideMenu = (props) => {
-  const p = props;
-  return (
-    <SiderStyle trigger={null} collapsible collapsed={p.state}>
-      <div className="logo" >深度学习平台</div>
-      <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
-        <Menu.Item key="1" icon={<HomeOutlined />}>
-          首页
-        </Menu.Item>
-        <Menu.Item key="2" icon={<PictureOutlined />}>
-          数据集
-        </Menu.Item>
-        <Menu.Item key="3" icon={<CodepenCircleOutlined />}>
-          训练
-        </Menu.Item>
-        <Menu.Item key="4" icon={<CloudSyncOutlined />}>
-          在线化服务
-        </Menu.Item>
-        <Menu.Item key="5" icon={<ShopFilled />}>
-          自助算法任务
-        </Menu.Item>
-        <Menu.Item key="6" icon={<SketchCircleFilled />}>
-          k8s监控台
-        </Menu.Item>
-      </Menu>
-    </SiderStyle>
-  );
-};
-
 // 图片内容展示
-const MidContent = () => {
+export default function DatasetMange() {
   const menu = (
     <Menu >
       <Menu.Item key="1" >
@@ -228,19 +145,3 @@ const MidContent = () => {
     </ContentStyle>
   );
 };
-
-export default function DatasetMange() {
-  const [state, setstate] = useState(false);
-
-  return (
-    <>
-      <LayoutStyle>
-        <SideMenu state={state} ></SideMenu>
-        <Layout>
-          <TopHeader setstate={setstate} state={state} ></TopHeader>
-          <MidContent></MidContent>
-        </Layout>
-      </LayoutStyle>
-    </>
-  );
-}

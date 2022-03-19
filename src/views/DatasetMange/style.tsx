@@ -66,7 +66,7 @@ export const SiderStyle = styled(Sider)`
 
 export const ContentStyle = styled(Content)`
   background-color:white;
-  padding:30px 50px;
+  padding:0 50px;
 `;
 
 export const CardStyle = styled(Card)`

@@ -8,6 +8,7 @@ import ClassifyPage from '@/views/ClassifyPage';
 import EnhancePage from '@/views/EnhancePage';
 import EvaluatePage from '@/views/EvaluatePage';
 import GenerationPage from '@/views/GenerationPage';
+import DatasetMangePage from '../DatasetMange';
 import { useRoutes, Navigate } from 'react-router-dom';
 import { HomePageWrap } from './style';
 
@@ -22,6 +23,7 @@ export default function HomePage() {
       { path: '/generation', element: <GenerationPage /> },
       { path: '/enhance', element: <EnhancePage /> },
       { path: '/classify', element: <ClassifyPage /> },
+      { path: '/dataset', element: <DatasetMangePage /> },
       // 重定向
       // { path: 'home', element: <Navigate to="/"></Navigate> },
       // 404找不到
