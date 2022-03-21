@@ -77,6 +77,15 @@ export default function TopTabs() {
           个人中心
         </UserCenterTab>
       )
+    },
+    {
+      key: 'dataset',
+      tabNode: (
+        <UserCenterTab>
+          <UserCenterIcon className="iconfont icon-generation" />
+          数据集管理
+        </UserCenterTab>
+      )
     }
   ];
 

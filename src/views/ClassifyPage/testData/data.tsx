@@ -1,9 +1,16 @@
-import image1 from '@/assets/images/image1.jpg';
-import image2 from '@/assets/images/image2.jpg';
-import image3 from '@/assets/images/image3.jpg';
-import image4 from '@/assets/images/image4.jpg';
-import image5 from '@/assets/images/image5.jpg';
-import image6 from '@/assets/images/image6.jpg';
+import image1 from '@/assets/images/CC_1.jpg';
+import image2 from '@/assets/images/CC_2.jpg';
+import image3 from '@/assets/images/CC_3.jpg';
+import image4 from '@/assets/images/CC_4.jpg';
+import image5 from '@/assets/images/CC_5.jpg';
+import image6 from '@/assets/images/CC_6.jpg';
+import image7 from '@/assets/images/CC_7.jpg';
+import image8 from '@/assets/images/CC_8.jpg';
+import image9 from '@/assets/images/CC_9.jpg';
+import image10 from '@/assets/images/CC_10.jpg';
+import image11 from '@/assets/images/CC_11.jpg';
+
+export const imageTags = ['Complementary Colors', 'Macro', 'Shadow DOF'];
 
 export const imgScore = [
   {
@@ -57,18 +64,26 @@ export const imgScore = [
 
 export const attrList = [
   {
-    Label: 'light',
+    Label: 'Complementary Colors',
     attrId: '0',
-    imageList: [image1, image2, image3, image4, image5, image6]
+    imageList: [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10]
   },
   {
-    Label: 'Content',
+    Label: 'Macro',
     attrId: '1',
     imageList: [image2, image4, image5, image1, image3, image6]
   },
   {
-    Label: 'Object',
+    Label: 'Shadow DOF',
     attrId: '2',
     imageList: [image1, image3, image5, image6, image4, image2]
   }
+  // {
+  //   Label: '风格标签纠错',
+  //   attrId: '3',
+  //   imageList: [],
+  //   content: <div>
+
+  //   </div>
+  // }
 ];
