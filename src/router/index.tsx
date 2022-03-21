@@ -34,7 +34,7 @@ export const loginRoutes: RouteProps[] = [
 
 export const routes: RouteProps[] = [
   {
-    path: 'community',
+    path: '/community',
     meta: {
       auth: true,
       roles: [USER_ROLE_ENUM.ADMIN]
@@ -42,7 +42,7 @@ export const routes: RouteProps[] = [
     element: lazyLoad(lazy(() => import('@/views/CommunityPage')))
   },
   {
-    path: 'evaluate',
+    path: '/evaluate',
     meta: {
       auth: true,
       roles: [USER_ROLE_ENUM.ADMIN]
@@ -50,7 +50,7 @@ export const routes: RouteProps[] = [
     element: lazyLoad(lazy(() => import('@/views/EvaluatePage')))
   },
   {
-    path: 'generation',
+    path: '/generation',
     meta: {
       auth: true,
       roles: [USER_ROLE_ENUM.ADMIN]
@@ -58,7 +58,7 @@ export const routes: RouteProps[] = [
     element: lazyLoad(lazy(() => import('@/views/GenerationPage')))
   },
   {
-    path: 'enhance',
+    path: '/enhance',
     meta: {
       auth: true,
       roles: [USER_ROLE_ENUM.ADMIN]
@@ -66,7 +66,7 @@ export const routes: RouteProps[] = [
     element: lazyLoad(lazy(() => import('@/views/EnhancePage')))
   },
   {
-    path: 'classify',
+    path: '/classify',
     meta: {
       auth: true,
       roles: [USER_ROLE_ENUM.ADMIN]
@@ -74,7 +74,15 @@ export const routes: RouteProps[] = [
     element: lazyLoad(lazy(() => import('@/views/ClassifyPage')))
   },
   {
-    path: 'user',
+    path: '/dataset',
+    meta: {
+      auth: true,
+      roles: [USER_ROLE_ENUM.ADMIN]
+    },
+    element: lazyLoad(lazy(() => import('@/views/DatasetMange')))
+  },
+  {
+    path: '/user',
     meta: {
       auth: true,
       unRoles: [USER_ROLE_ENUM.GUEST]

@@ -74,7 +74,8 @@ export const getCurPageTitle = (curPath: string) => {
     { key: '/evaluate', title: '图像美学评价' },
     { key: '/generation', title: '美学图像生成' },
     { key: '/enhance', title: '图像美学增强' },
-    { key: '/classify', title: '图像美学分类' }
+    { key: '/classify', title: '图像美学分类' },
+    { key: '/dataset', title: '美学风格数据集管理' }
   ];
 
   const curIndex = pageNameList.findIndex(item => {
