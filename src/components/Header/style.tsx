@@ -64,11 +64,6 @@ export const LoginButton = styled(Button)`
   margin-left: 10px;
 `;
 
-export const RegisterButton = styled(Button)`
-  height: 34px;
-  margin-left: 10px;
-`;
-
 export const UICurPageTitle = styled.div`
   padding: 0 20px 10px 20px;
   background-color: #fff;

@@ -1,42 +1,35 @@
-// import React from 'react';
+import React, { Suspense, useMemo } from 'react';
 import Header from '@/components/Header';
-// import LoginPage from '../LoginPage';
-import NotFind from '@/components/NotFind';
-import CommunityPage from '@/views/CommunityPage';
-import UserCenterPage from '@/views/UserCenterPage';
-import ClassifyPage from '@/views/ClassifyPage';
-import EnhancePage from '@/views/EnhancePage';
-import EvaluatePage from '@/views/EvaluatePage';
-import GenerationPage from '@/views/GenerationPage';
-import DatasetMangePage from '../DatasetMange';
+import Loading from '@/components/Loading';
 import { useRoutes, Navigate } from 'react-router-dom';
+import { loginRoutes, routes, screenRoutesByRole } from '@/router';
 import { HomePageWrap } from './style';
+import { useAuth } from '@/utils/auth';
+import store from '@/store';
+import { useSelector } from 'react-redux';
+import { loginInfoSelector } from '@/store/reducers/loginInfo';
+import LoginPage from '../LoginPage';
 
 export default function HomePage() {
-  const GetRoutes = () => {
-    // const isLogin = true;
-    const routes = useRoutes([
-      { path: '/', element: <Navigate to="/user" /> },
-      { path: '/community', element: <CommunityPage /> },
-      { path: '/user', element: <UserCenterPage /> },
-      { path: '/evaluate', element: <EvaluatePage /> },
-      { path: '/generation', element: <GenerationPage /> },
-      { path: '/enhance', element: <EnhancePage /> },
-      { path: '/classify', element: <ClassifyPage /> },
-      { path: '/dataset', element: <DatasetMangePage /> },
-      // 重定向
-      // { path: 'home', element: <Navigate to="/"></Navigate> },
-      // 404找不到
-      { path: '*', element: <NotFind /> }
-    ]);
-    return routes;
-  };
-  return (
-    <>
-      <Header></Header>
-      <HomePageWrap>
-        <GetRoutes />
-      </HomePageWrap>
-    </>
-  );
+  // const { role } = store.getState().userInfo;
+  // const curRoutes = useMemo(() => {
+  //   return screenRoutesByRole(routes);
+  // }, [role]);
+  const { signOut, isLogin } = useAuth();
+  const homeRoutes = useRoutes(routes);
+  const loginInfo = useSelector(loginInfoSelector);
+  const loginPageRoutes = useRoutes(loginRoutes);
+
+  if (loginInfo.isLogin) {
+    return (
+      <>
+        <Header></Header>
+        <Suspense fallback={<Loading />}>
+          <HomePageWrap>{homeRoutes}</HomePageWrap>
+        </Suspense>
+      </>
+    );
+  }
+
+  return <Suspense fallback={<Loading />}>{loginPageRoutes}</Suspense>;
 }

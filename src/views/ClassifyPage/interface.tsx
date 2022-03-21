@@ -20,7 +20,7 @@ export interface ImageAttributesType {
 }
 
 export interface AttrImgListType {
-  Label: string;
+  label: string;
   attrId: string;
   imageList: string[];
 }

@@ -91,7 +91,14 @@ export const UIImageTabs = styled(Tabs)`
   }
 `;
 
+export const UIImgPageWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
 export const UIImgCol = styled.div`
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
 
@@ -147,4 +154,8 @@ export const UIHoverText = styled.div`
   color: #fff;
   opacity: 0;
   /* height: 0; */
+`;
+
+export const UIPaginationWrap = styled.div`
+  margin: 20px 0;
 `;
