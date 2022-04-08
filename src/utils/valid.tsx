@@ -90,3 +90,24 @@ export const lazyLoad = (
 ) => {
   return <Node />;
 };
+
+export enum LabelColorEnum {
+  ComplementaryColors = '#4472c4',
+  Duotones = '#c55a11',
+  HighDynamicRange = '#ed7d31',
+  ImageGrain = '#2f5597',
+  LightOnWhite = '#2f978b',
+  LongExposure = '#edc131',
+  Macro = '#ed6331',
+  MotionBlur = '#ed3163',
+  NegativeImage = '#31ed98',
+  RuleOfThirds = '#aeed31',
+  ShallowDOF = '#ed5031',
+  Silhouettes = '#7631ed',
+  SoftFocus = '#ed3144',
+  VanishingPoint = '#98ed31'
+}
+
+export const getLabelColor = (label: string) => {
+  return LabelColorEnum[label];
+};

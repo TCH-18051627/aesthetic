@@ -4,23 +4,23 @@ import Loading from '@/components/Loading';
 import { useRoutes, Navigate } from 'react-router-dom';
 import { loginRoutes, routes, screenRoutesByRole } from '@/router';
 import { HomePageWrap } from './style';
-import { useAuth } from '@/utils/auth';
-import store from '@/store';
-import { useSelector } from 'react-redux';
-import { loginInfoSelector } from '@/store/reducers/loginInfo';
-import LoginPage from '../LoginPage';
+// import { useAuth } from '@/utils/auth';
+// import { useSelector } from 'react-redux';
+// import { loginInfoSelector } from '@/store/reducers/loginInfo';
+import { LOGIN_KEY } from '@/assets/js/constant';
+import storage from 'good-storage';
 
 export default function HomePage() {
   // const { role } = store.getState().userInfo;
   // const curRoutes = useMemo(() => {
   //   return screenRoutesByRole(routes);
   // }, [role]);
-  const { signOut, isLogin } = useAuth();
+  // const { signOut, isLogin } = useAuth();
   const homeRoutes = useRoutes(routes);
-  const loginInfo = useSelector(loginInfoSelector);
+  // const loginInfo = useSelector(loginInfoSelector);
   const loginPageRoutes = useRoutes(loginRoutes);
 
-  if (loginInfo.isLogin) {
+  if (storage.session.get(LOGIN_KEY)) {
     return (
       <>
         <Header></Header>

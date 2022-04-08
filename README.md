@@ -54,16 +54,27 @@ aesthetic
 │  ├─ App.test.tsx
 │  ├─ App.tsx
 │  ├─ assets
-│  ├─ components  //  公共组件
-│  │  ├─ 404
-│  │  │  ├─ index.tsx
-│  │  │  ├─ interface.tsx
-│  │  │  └─ style.tsx
+│  │  ├─ fonts
+│  │  ├─ images
+│  │  ├─ js
+│  │  └─ scss
+│  ├─ components
 │  │  ├─ Footer
 │  │  │  ├─ index.tsx
 │  │  │  ├─ interface.tsx
 │  │  │  └─ style.tsx
 │  │  ├─ Header
+│  │  │  ├─ index.tsx
+│  │  │  ├─ interface.tsx
+│  │  │  └─ style.tsx
+│  │  ├─ Loading
+│  │  │  ├─ index.tsx
+│  │  │  └─ style.tsx
+│  │  ├─ NotFind
+│  │  │  ├─ index.tsx
+│  │  │  ├─ interface.tsx
+│  │  │  └─ style.tsx
+│  │  ├─ SearchSelect
 │  │  │  ├─ index.tsx
 │  │  │  ├─ interface.tsx
 │  │  │  └─ style.tsx
@@ -77,34 +88,87 @@ aesthetic
 │  ├─ logo.svg
 │  ├─ react-app-env.d.ts
 │  ├─ reportWebVitals.ts
-│  ├─ router  //  路由
-│  │  ├─ config.js    // 项目路由配置
-│  │  ├─ index.js   // 单页面路由注册组件
-│  │  └─ permissionAuth.js    // 登录权限控制组件
+│  ├─ router
+│  │  ├─ config.tsx   // 项目路由配置
+│  │  ├─ index.tsx    // 单页面路由注册组件
+│  │  └─ routes.d.tsx
+│  ├─ service
+│  │  ├─ base.tsx
+│  │  ├─ classifyInfo.tsx
+│  │  ├─ interface.tsx
+│  │  └─ userInfo.tsx
 │  ├─ setupTests.ts
-│  ├─ store   
-│  │  ├─ actions
-│  │  │  ├─ auth.js
-│  │  │  ├─ index.js
-│  │  │  └─ user.js
-│  │  ├─ actionType.js
-│  │  ├─ index.js
+│  ├─ store
+│  │  ├─ constants.tsx
+│  │  ├─ index.tsx
 │  │  └─ reducers
-│  │     ├─ index.js
-│  │     └─ user.js
+│  │     ├─ classifyInfo
+│  │     │  ├─ index.tsx
+│  │     │  └─ interface.tsx
+│  │     ├─ index.tsx
+│  │     ├─ loginInfo
+│  │     │  ├─ index.tsx
+│  │     │  └─ interface.tsx
+│  │     └─ userInfo
+│  │        ├─ index.tsx
+│  │        └─ interface.tsx
 │  ├─ styles
 │  │  └─ bass.scss
-│  ├─ utils   // 工具函数等
-│  │  ├─ api.js   // 统一封装API接口调用方法
-│  │  ├─ network.js   // axios封装与拦截器配置
-│  │  ├─ url.js   // 自动部署服务器环境
-│  │  └─ valid.js   // 统一封装公用模块方法
-│  └─ views   //  主视图页面
-│     ├─ HomePage   // 首页
+│  ├─ utils
+│  │  ├─ api.js
+│  │  ├─ auth.tsx
+│  │  ├─ network.js
+│  │  ├─ url.tsx
+│  │  └─ valid.tsx
+│  └─ views
+│     ├─ ClassifyPage
+│     │  ├─ index.tsx
+│     │  ├─ interface.tsx
+│     │  ├─ style.tsx
+│     │  ├─ testData
+│     │  │  └─ data.tsx
+│     │  └─ utils
+│     ├─ CommunityPage
 │     │  ├─ index.tsx
 │     │  ├─ interface.tsx
 │     │  └─ style.tsx
-│     └─ LoginPage    // 登录页面
+│     ├─ DatasetMange
+│     │  ├─ index.tsx
+│     │  ├─ interface.tsx
+│     │  └─ style.tsx
+│     ├─ EnhancePage
+│     │  ├─ index.tsx
+│     │  ├─ interface.tsx
+│     │  └─ style.tsx
+│     ├─ EvaluatePage
+│     │  ├─ index.tsx
+│     │  ├─ interface.tsx
+│     │  ├─ style.tsx
+│     │  ├─ testData
+│     │  │  └─ data.tsx
+│     │  └─ utils
+│     │     └─ createOption
+│     │        ├─ index.tsx
+│     │        └─ interface.tsx
+│     ├─ GenerationPage
+│     │  ├─ index.tsx
+│     │  ├─ interface.tsx
+│     │  ├─ style.tsx
+│     │  └─ testData
+│     │     └─ data.tsx
+│     ├─ HomePage
+│     │  ├─ index.tsx
+│     │  ├─ interface.tsx
+│     │  └─ style.tsx
+│     ├─ LoginPage
+│     │  ├─ index.tsx
+│     │  ├─ interface.tsx
+│     │  └─ style.tsx
+│     ├─ RegisterPage
+│     │  ├─ index.tsx
+│     │  ├─ interface.tsx
+│     │  └─ style.tsx
+│     └─ UserCenterPage
 │        ├─ index.tsx
 │        ├─ interface.tsx
 │        └─ style.tsx
