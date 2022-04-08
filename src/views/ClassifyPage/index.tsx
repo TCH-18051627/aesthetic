@@ -12,6 +12,7 @@ import {
 import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
 import { imgScore, attrList } from './testData/data';
 import { ImageAttributesType } from './interface';
+import { getBase64 } from './util';
 import {
   UIListHeader,
   UploadWrap,
@@ -36,23 +37,13 @@ import {
   UIHoverText,
   UIPaginationWrap
 } from './style';
+import { random } from 'lodash';
+import { getLabelColor } from '@/utils/valid';
 
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
 
 export default function ClassifyPage() {
-  const getBase64 = (file: File) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  };
-  const [imageUrl, setImageUrl] = useState(
-    'http://vueshop.glbuys.com/userfiles/head/590472285.jpeg'
-  );
-
   // 遮罩层的开关state
   const [previewVisible, setpreviewVisible] = useState<boolean>(false);
   // 遮罩层打开后显示的图片
@@ -61,8 +52,11 @@ export default function ClassifyPage() {
   const [previewTitle, setpreviewTitle] = useState<string>('');
   // 上传图片左侧弹出的列表 默认number[]
   const [fileList, setFileList] = useState([]);
+  // 上传后回显至下方的图像分类列表
+  const [classifyImgList, setClassifyImgList] = useState([]);
   // 上传中...加载状态.....
   const [upImgloading, setUpImgloading] = useState<boolean>(false);
+
   // 图片数据分页初始index
   const [preIndex, setPreIndex] = useState<number>(0);
   // 图片数据分页结尾index
@@ -73,11 +67,12 @@ export default function ClassifyPage() {
     // { file, fileList }
     // 看官方文档 第一个 file 获取上传文件信息
     // 第二个 fileList 获取的是当前上传成功的图片对象
+    console.info('------------file--------------', file, fileList);
 
     // 判断图片格式是否为jpeg
     const isJpgOrPng = file.type === 'image/jpeg' || 'image/png';
     if (!isJpgOrPng) {
-      message.error('文件格式不正确!');
+      message.error('文件格式不正确，仅支持jpg和png！');
       return isJpgOrPng;
     }
 
@@ -91,11 +86,8 @@ export default function ClassifyPage() {
       return isLt50K;
     }
 
-    // 这里才是有趣的地方
     // 当上方拦截器都未触发 则执行此判断
     if (isJpgOrPng && isLt50K) {
-      // 首先清空 编辑 或者 详情 传递过来的数据图片地址
-      setImageUrl('');
       // 其次更新上传图片列表 并重新渲染render()
       setFileList(fileList);
 
@@ -111,19 +103,20 @@ export default function ClassifyPage() {
         setUpImgloading(false);
         // 获取上传图片头部url + 图片路径地址
         const url =
-          'http://vueshop.glbuys.com/userfiles/head/' +
-          file.response.data.msbox;
+          'http://rap2api.taobao.org/app/mock/280998/api/uploadClassifyImage/' +
+          file.response.data.imgList?.[0].url;
         // 这里如果表单形式 可以用form回填
         console.info(url);
+        setClassifyImgList(file.response.data.imgList);
       }
     }
   };
 
   //   点击上传时触发事件函数
   const handlePreview = async (file: any) => {
-    //       点击获取本地弹窗 并且获取本地待上传的文件路径
+    // 点击获取本地弹窗 并且获取本地待上传的文件路径
     if (!file.url && !file.preview) {
-      // * 个人理解 这里是调用本地弹窗获取本地图片路径 并且上传到file 原型链中
+      // 这里是调用本地弹窗获取本地图片路径 并且上传到file 原型链中
       // 预览的图片 调用异步方法 getBase64 获取到文件详情
       file.preview = await getBase64(file.originFileObj);
     }
@@ -155,13 +148,11 @@ export default function ClassifyPage() {
           <Upload
             name="headfile"
             // 图片上传服务器地址
-            action="http://vueshop.glbuys.com/api/user/myinfo/formdatahead?token=1ec949a15fb709670f"
+            action="http://rap2api.taobao.org/app/mock/280998/api/uploadClassifyImage"
             // 图片上传类型
             // listType="picture-card"
             // 上传列表
             fileList={fileList}
-            // 默认列表只能上传一条 多余的进行覆盖
-            maxCount={1}
             // 点击触发遮罩层方法 更新遮罩层 图片以及标题
             onPreview={handlePreview}
             // 点击触发上传图片方法 判断格式 以及 文件大小 并且 更新上传图片
@@ -177,8 +168,6 @@ export default function ClassifyPage() {
           <ClearButton
             type="primary"
             onClick={() => {
-              // 清空路由传递来的图片路径
-              setImageUrl('');
               // 清空上传图片列表数据
               setFileList([]);
             }}
@@ -264,6 +253,35 @@ export default function ClassifyPage() {
                     <UIChartsWrap>
                       {item.aestheticAttributes.map(attr => (
                         <UIAttriButeTag key={attr.label} color={attr.color}>
+                          {attr.label}
+                        </UIAttriButeTag>
+                      ))}
+                    </UIChartsWrap>
+                  </UILineWrap>
+                </Card>
+              </List.Item>
+            )}
+          />
+        </Panel>
+      </UICollapse>
+      <UICollapse>
+        <Panel header="图像分类结果" key="2">
+          <List
+            bordered
+            dataSource={classifyImgList}
+            style={UIListBodyStyle}
+            grid={{ gutter: 16, column: 3 }}
+            renderItem={(item: ImageAttributesType) => (
+              <List.Item key={item.imageId} style={UIListItemStyle}>
+                <Card>
+                  <UILineWrap>
+                    <UIdisplayImg src={item.imageUrl} />
+                    <UIChartsWrap>
+                      {item.aestheticAttributes.map(attr => (
+                        <UIAttriButeTag
+                          key={Math.random().toString(36).slice(-6)}
+                          color={getLabelColor(attr.label)}
+                        >
                           {attr.label}
                         </UIAttriButeTag>
                       ))}

@@ -8,7 +8,7 @@ export interface AestheticScoreType {
 
 export interface AttributesLabelType {
   label: string;
-  color: string;
+  color?: string;
 }
 
 export interface ImageAttributesType {

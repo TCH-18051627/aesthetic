@@ -18,6 +18,8 @@ import { useAuth } from '@/utils/auth';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { setIsLogin } from '@/store/reducers/loginInfo';
 import { useDispatch } from 'react-redux';
+import { LOGIN_KEY } from '@/assets/js/constant';
+import storage from 'good-storage';
 
 const { Header } = Layout;
 
@@ -32,6 +34,7 @@ export default function LoginPage() {
   const onLoginClick = () => {
     signIn();
     dispatch(setIsLogin(true));
+    storage.session.set(LOGIN_KEY, true);
     navigate(from);
   };
 
