@@ -34,8 +34,7 @@ export default function TopTabs() {
     { key: 'evaluate', title: '图像美学评价' },
     { key: 'generation', title: '美学图像生成' },
     { key: 'enhance', title: '图像美学增强' },
-    { key: 'classify', title: '图像美学分类' },
-    { key: 'dataset', title: '美学风格数据集管理' }
+    { key: 'classify', title: '图像美学分类' }
   ];
   const menu = (
     <Menu onClick={onMenuClick}>
@@ -76,6 +75,15 @@ export default function TopTabs() {
         <UserCenterTab>
           <UserCenterIcon className="iconfont icon-gerenzhongxin2" />
           个人中心
+        </UserCenterTab>
+      )
+    },
+    {
+      key: 'dataset',
+      tabNode: (
+        <UserCenterTab>
+          <UserCenterIcon className="iconfont icon-generation" />
+          数据集管理
         </UserCenterTab>
       )
     }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import TopTabs from '../TopTabs';
 import { Button } from 'antd';
+import { LOGIN_KEY } from '@/assets/js/constant';
+import storage from 'good-storage';
 import SearchSelect from '../SearchSelect';
 import { setIsLogin } from '@/store/reducers/loginInfo';
 import { useDispatch } from 'react-redux';
@@ -30,6 +32,7 @@ export default function Header() {
 
   const onLoginOutClick = () => {
     dispatch(setIsLogin(false));
+    storage.session.set(LOGIN_KEY, false);
     navigate('/login');
   };
 
