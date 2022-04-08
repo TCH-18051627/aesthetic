@@ -1,9 +1,16 @@
-import image1 from '@/assets/images/image1.jpg';
-import image2 from '@/assets/images/image2.jpg';
-import image3 from '@/assets/images/image3.jpg';
-import image4 from '@/assets/images/image4.jpg';
-import image5 from '@/assets/images/image5.jpg';
-import image6 from '@/assets/images/image6.jpg';
+import image1 from '@/assets/images/CC_1.jpg';
+import image2 from '@/assets/images/CC_2.jpg';
+import image3 from '@/assets/images/CC_3.jpg';
+import image4 from '@/assets/images/CC_4.jpg';
+import image5 from '@/assets/images/CC_5.jpg';
+import image6 from '@/assets/images/CC_6.jpg';
+import image7 from '@/assets/images/CC_7.jpg';
+import image8 from '@/assets/images/CC_8.jpg';
+import image9 from '@/assets/images/CC_9.jpg';
+import image10 from '@/assets/images/CC_10.jpg';
+import image11 from '@/assets/images/CC_11.jpg';
+
+export const imageTags = ['Complementary Colors', 'Macro', 'Shadow DOF'];
 
 export const imgScore = [
   {
@@ -57,37 +64,37 @@ export const imgScore = [
 
 export const attrList = [
   {
-    label: 'light',
+    label: 'Complementary Colors',
     attrId: '0',
     imageList: [
       { imgUrl: image1, id: '0' },
       { imgUrl: image2, id: '1' },
-      { imgUrl: image4, id: '2' },
-      { imgUrl: image3, id: '3' },
-      { imgUrl: image6, id: '4' },
-      { imgUrl: image5, id: '5' },
-      { imgUrl: image6, id: '6' },
-      { imgUrl: image2, id: '7' },
-      { imgUrl: image1, id: '8' },
-      { imgUrl: image3, id: '9' },
-      { imgUrl: image5, id: '10' },
-      { imgUrl: image4, id: '11' },
-      { imgUrl: image1, id: '12' },
-      { imgUrl: image2, id: '13' },
-      { imgUrl: image4, id: '14' },
-      { imgUrl: image3, id: '15' },
-      { imgUrl: image6, id: '16' },
-      { imgUrl: image5, id: '17' },
-      { imgUrl: image6, id: '18' },
-      { imgUrl: image2, id: '19' },
+      { imgUrl: image3, id: '2' },
+      { imgUrl: image4, id: '3' },
+      { imgUrl: image5, id: '4' },
+      { imgUrl: image6, id: '5' },
+      { imgUrl: image7, id: '6' },
+      { imgUrl: image8, id: '7' },
+      { imgUrl: image9, id: '8' },
+      { imgUrl: image10, id: '9' },
+      { imgUrl: image11, id: '10' },
+      { imgUrl: image2, id: '11' },
+      { imgUrl: image3, id: '12' },
+      { imgUrl: image4, id: '13' },
+      { imgUrl: image5, id: '14' },
+      { imgUrl: image6, id: '15' },
+      { imgUrl: image7, id: '16' },
+      { imgUrl: image8, id: '17' },
+      { imgUrl: image9, id: '18' },
+      { imgUrl: image10, id: '19' },
       { imgUrl: image1, id: '20' },
-      { imgUrl: image3, id: '21' },
-      { imgUrl: image5, id: '22' },
-      { imgUrl: image4, id: '23' }
+      { imgUrl: image2, id: '21' },
+      { imgUrl: image3, id: '22' },
+      { imgUrl: image11, id: '23' }
     ]
   },
   {
-    label: 'Content',
+    label: 'Macro',
     attrId: '1',
     imageList: [
       { imgUrl: image1, id: '0' },
@@ -117,7 +124,7 @@ export const attrList = [
     ]
   },
   {
-    label: 'Object',
+    label: 'Shadow DOF',
     attrId: '2',
     imageList: [
       { imgUrl: image1, id: '0' },
@@ -146,4 +153,12 @@ export const attrList = [
       { imgUrl: image4, id: '23' }
     ]
   }
+  // {
+  //   label: '风格标签纠错',
+  //   attrId: '3',
+  //   imageList: [],
+  //   content: <div>
+
+  //   </div>
+  // }
 ];

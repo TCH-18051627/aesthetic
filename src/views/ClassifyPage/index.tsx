@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   List,
   Card,
@@ -7,12 +7,24 @@ import {
   Modal,
   Collapse,
   Tabs,
+  Layout,
+  Drawer,
+  Button,
+  Input,
+  Tag,
+  Tooltip,
   Pagination
 } from 'antd';
-import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
-import { imgScore, attrList } from './testData/data';
+import {
+  UploadOutlined,
+  DownloadOutlined,
+  PlusOutlined
+} from '@ant-design/icons';
+import { imageTags, imgScore, attrList } from './testData/data';
 import { ImageAttributesType } from './interface';
 import { getBase64 } from './util';
+import testImage from '@/assets/images/459416_CC_Macro_DOF.jpg';
+
 import {
   UIListHeader,
   UploadWrap,
@@ -37,11 +49,12 @@ import {
   UIHoverText,
   UIPaginationWrap
 } from './style';
-import { random } from 'lodash';
-import { getLabelColor } from '@/utils/valid';
+// import { getlabelColor } from '@/utils/valid';
 
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
+const { TextArea } = Input;
+const { Header, Footer, Sider, Content } = Layout;
 
 export default function ClassifyPage() {
   // 遮罩层的开关state
@@ -61,6 +74,15 @@ export default function ClassifyPage() {
   const [preIndex, setPreIndex] = useState<number>(0);
   // 图片数据分页结尾index
   const [nextIndex, setNextIndex] = useState<number>(15);
+
+  const [drawerVisible, setdrawerVisible] = useState<boolean>(false);
+
+  const [imgTags, setImageTags] = useState(imageTags);
+  const [editInputIndex, setEditInputIndex] = useState(-1);
+  const [editInputValue, setEditInputValue] = useState('');
+  const [tagInputVisible, setTagInputVisible] = useState<boolean>(false);
+  const [tagInputValue, setTagInputValue] = useState<string>('');
+  const tagRef = useRef();
 
   // 判断上传图片拦截方法
   const handleChange = ({ file, fileList }: any) => {
@@ -141,6 +163,27 @@ export default function ClassifyPage() {
     }
   };
 
+  const handleEditInputConfirm = () => {
+    const newTags = [...imgTags];
+    newTags[editInputIndex] = editInputValue;
+
+    setImageTags(newTags);
+    setEditInputIndex(-1);
+    setEditInputValue('');
+  };
+
+  const handleInputConfirm = () => {
+    let newImgTags;
+    if (tagInputValue && imgTags.indexOf(tagInputValue) === -1) {
+      newImgTags = [...imgTags, tagInputValue];
+    }
+    console.log(imgTags);
+    setImageTags(newImgTags);
+    setImageTags(imgTags);
+    setTagInputVisible(false);
+    setEditInputValue('');
+  };
+
   const UploadHeader = () => {
     return (
       <UploadWrap>
@@ -176,7 +219,7 @@ export default function ClassifyPage() {
           </ClearButton>
 
           <UIUrlInput placeholder="搜索具有某种属性的图像"></UIUrlInput>
-
+          <ClearButton type="primary">搜索</ClearButton>
           <UIExportButton icon={<DownloadOutlined />}>
             导出为Excel
           </UIExportButton>
@@ -231,6 +274,108 @@ export default function ClassifyPage() {
             </UIImgPageWrap>
           </TabPane>
         ))}
+        <TabPane tab={'风格标签纠错'} key={'风格标签纠错'}>
+          <UIImgCol>
+            <UIImgWrap>
+              <div style={{ height: '50px', padding: '8px' }}>
+                {imgTags.map((imgTag, index) => {
+                  if (editInputIndex === index) {
+                    return (
+                      <Input
+                        // ref={tagRef}
+                        key={imgTag}
+                        size="small"
+                        className="tag-input"
+                        value={editInputValue}
+                        onChange={e => {
+                          setEditInputValue(e.target.value);
+                        }}
+                        onBlur={handleEditInputConfirm}
+                        onPressEnter={handleEditInputConfirm}
+                      />
+                    );
+                  }
+
+                  const isLongTag = imgTag.length > 20;
+
+                  const tagElem = (
+                    <Tag
+                      className="edit-tag"
+                      style={{ fontSize: '14px' }}
+                      key={imgTag}
+                      closable={index !== 0}
+                      onClose={() => {
+                        const newTags = imgTags.filter(tag => tag !== imgTag);
+                        setImageTags(newTags);
+                      }}
+                    >
+                      <span
+                        onDoubleClick={e => {
+                          if (index !== 0) {
+                            setEditInputIndex(index);
+                            setEditInputValue(imgTag);
+                            e.preventDefault();
+                          }
+                        }}
+                      >
+                        {imgTag}
+                        {/* {isLongTag ? `${imgTag.slice(0, 20)}...` : imgTag} */}
+                      </span>
+                    </Tag>
+                  );
+
+                  return tagElem;
+                })}
+
+                {tagInputVisible && (
+                  <Input
+                    // ref={this.saveInputRef}
+                    type="text"
+                    size="small"
+                    className="tag-input"
+                    value={tagInputValue}
+                    onChange={e => {
+                      setEditInputValue(e.target.value);
+                    }}
+                    onBlur={handleInputConfirm}
+                    onPressEnter={handleInputConfirm}
+                    style={{
+                      width: '78px',
+                      marginRight: '8px',
+                      verticalAlign: 'top'
+                    }}
+                  />
+                )}
+                {!tagInputVisible && (
+                  <Tag
+                    className="site-tag-plus"
+                    onClick={() => setTagInputVisible(true)}
+                  >
+                    <PlusOutlined /> New Tag
+                  </Tag>
+                )}
+              </div>
+              <div style={{ padding: '8px' }}>
+                <TextArea
+                  style={{ height: '300px', width: '800px' }}
+                  rows={4}
+                  placeholder="补充风格标签纠错具体理由"
+                  maxLength={6}
+                />
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'end',
+                    marginTop: '2px'
+                  }}
+                >
+                  <Button type="primary">提交</Button>
+                </div>
+              </div>
+            </UIImgWrap>
+          </UIImgCol>
+        </TabPane>
       </UIImageTabs>
     );
   };
@@ -238,33 +383,93 @@ export default function ClassifyPage() {
   return (
     <>
       <UIListHeader header={UploadHeader()} bordered dataSource={['1']} />
+      <Layout>
+        <Content>
+          <Card
+            style={{
+              position: 'relative',
+              padding: '0px',
+              overflow: 'hidden',
+              textAlign: 'center',
+              background: '#fafafa',
+              border: '0px solid #ebedf0',
+              borderRadius: '2px',
+              height: '100%'
+            }}
+            bodyStyle={{ padding: '0px' }}
+          >
+            <div
+              onClick={() => {
+                setdrawerVisible(true);
+              }}
+              style={{ height: '100%', width: '100%' }}
+            >
+              <img
+                src={testImage}
+                style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+              />
+            </div>
+            <Drawer
+              title="风格识别结果"
+              placement="right"
+              closable={false}
+              onClose={() => {
+                setdrawerVisible(false);
+              }}
+              visible={drawerVisible}
+              getContainer={false}
+              style={{ position: 'absolute', opacity: '0.7' }}
+              maskStyle={{ backgroundColor: 'transparent' }}
+              contentWrapperStyle={{ width: '250px' }}
+            >
+              <p style={{ fontSize: '18px' }}>Complementray Colors</p>
+              <p style={{ fontSize: '18px' }}>Macro</p>
+              <p style={{ fontSize: '18px' }}>Shadow DOF</p>
+            </Drawer>
+          </Card>
+        </Content>
+        <Sider
+          width="60%"
+          style={{
+            position: 'relative',
+            padding: '10px',
+            paddingTop: '0px',
+            overflow: 'hidden',
+            textAlign: 'center',
+            background: '#fafafa',
+            border: '0px solid #ebedf0',
+            borderRadius: '2px'
+          }}
+        >
+          {' '}
+          {ImageTabList()}
+        </Sider>
+      </Layout>
       <UICollapse>
-        <Panel header="查看每种属性样例" key="1">
-          <List
-            bordered
-            dataSource={imgScore}
-            style={UIListBodyStyle}
-            grid={{ gutter: 16, column: 3 }}
-            renderItem={(item: ImageAttributesType) => (
-              <List.Item key={item.imageId} style={UIListItemStyle}>
-                <Card>
-                  <UILineWrap>
-                    <UIdisplayImg src={item.imageUrl} />
-                    <UIChartsWrap>
-                      {item.aestheticAttributes.map(attr => (
-                        <UIAttriButeTag key={attr.label} color={attr.color}>
-                          {attr.label}
-                        </UIAttriButeTag>
-                      ))}
-                    </UIChartsWrap>
-                  </UILineWrap>
-                </Card>
-              </List.Item>
-            )}
-          />
-        </Panel>
+        {/* <List
+          bordered
+          dataSource={imgScore}
+          style={UIListBodyStyle}
+          grid={{ gutter: 16, column: 3 }}
+          renderItem={(item: ImageAttributesType) => (
+            <List.Item key={item.imageId} style={UIListItemStyle}>
+              <Card>
+                <UILineWrap>
+                  <UIdisplayImg src={item.imageUrl} />
+                  <UIChartsWrap>
+                    {item.aestheticAttributes.map(attr => (
+                      <UIAttriButeTag key={attr.label} color={attr.color}>
+                        {attr.label}
+                      </UIAttriButeTag>
+                    ))}
+                  </UIChartsWrap>
+                </UILineWrap>
+              </Card>
+            </List.Item>
+          )}
+        /> */}
       </UICollapse>
-      <UICollapse>
+      {/* <UICollapse>
         <Panel header="图像分类结果" key="2">
           <List
             bordered
@@ -280,7 +485,7 @@ export default function ClassifyPage() {
                       {item.aestheticAttributes.map(attr => (
                         <UIAttriButeTag
                           key={Math.random().toString(36).slice(-6)}
-                          color={getLabelColor(attr.label)}
+                          color={getlabelColor(attr.label)}
                         >
                           {attr.label}
                         </UIAttriButeTag>
@@ -293,7 +498,7 @@ export default function ClassifyPage() {
           />
         </Panel>
       </UICollapse>
-      {ImageTabList()}
+      {ImageTabList()} */}
     </>
   );
 }
