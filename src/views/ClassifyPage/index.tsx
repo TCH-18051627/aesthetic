@@ -131,12 +131,12 @@ export default function ClassifyPage() {
         // 则上传按钮加载完成
         setUpImgloading(false);
         // 获取上传图片头部url + 图片路径地址
-        const url =
-          'http://rap2api.taobao.org/app/mock/280998/api/uploadClassifyImage/' +
-          file.response.data.imgList?.[0].url;
-        // 这里如果表单形式 可以用form回填
-        console.info(url);
-        setClassifyImgList(file.response.data.imgList);
+        // const url =
+        //   'http://rap2api.taobao.org/app/mock/280998/api/uploadClassifyImage/' +
+        //   file.response.data.imgList?.[0].url;
+        // // 这里如果表单形式 可以用form回填
+        // console.info(url);
+        setClassifyImgList(file.response.attrList);
       }
     }
   };
@@ -196,9 +196,10 @@ export default function ClassifyPage() {
       <UploadWrap>
         <>
           <Upload
-            name="headfile"
+            name="classify"
             // 图片上传服务器地址
-            action="http://rap2api.taobao.org/app/mock/280998/api/uploadClassifyImage"
+            // action="http://rap2api.taobao.org/app/mock/280998/api/uploadClassifyImage"
+            action="/uploadClassifyImage"
             // 图片上传类型
             // listType="picture-card"
             // 上传列表
@@ -420,30 +421,6 @@ export default function ClassifyPage() {
         </UILeftArea>
         <UIRightArea>{ImageTabList()}</UIRightArea>
       </UIMidBody>
-      <UICollapse>
-        {/* <List
-          bordered
-          dataSource={imgScore}
-          style={UIListBodyStyle}
-          grid={{ gutter: 16, column: 3 }}
-          renderItem={(item: ImageAttributesType) => (
-            <List.Item key={item.imageId} style={UIListItemStyle}>
-              <Card>
-                <UILineWrap>
-                  <UIdisplayImg src={item.imageUrl} />
-                  <UIChartsWrap>
-                    {item.aestheticAttributes.map(attr => (
-                      <UIAttriButeTag key={attr.label} color={attr.color}>
-                        {attr.label}
-                      </UIAttriButeTag>
-                    ))}
-                  </UIChartsWrap>
-                </UILineWrap>
-              </Card>
-            </List.Item>
-          )}
-        /> */}
-      </UICollapse>
       {/* <UICollapse>
         <Panel header="图像分类结果" key="2">
           <List
