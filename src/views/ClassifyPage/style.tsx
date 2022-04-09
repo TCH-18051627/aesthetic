@@ -1,5 +1,14 @@
 import styled from 'styled-components';
-import { List, Button, Input, Checkbox, Collapse, Tag, Tabs } from 'antd';
+import {
+  List,
+  Button,
+  Input,
+  Checkbox,
+  Collapse,
+  Tag,
+  Tabs,
+  Layout
+} from 'antd';
 
 export const UIListHeader = styled(List)`
   border-bottom: none;
@@ -158,4 +167,60 @@ export const UIHoverText = styled.div`
 
 export const UIPaginationWrap = styled.div`
   margin: 20px 0;
+`;
+
+export const UISubmitButton = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-top: 2px;
+`;
+
+export const UITextAreaWrap = styled.div`
+  padding: 8px;
+`;
+
+export const UITextAreaStyle = { height: '300px', width: '800px' };
+
+export const UITestImgWrap = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+export const UITestImg = styled.img`
+  height: 100%;
+  object-fit: cover;
+`;
+
+export const UIDrawerText = styled.p`
+  font-size: 18px;
+`;
+
+export const UIExampleArea = styled.div`
+  position: relative;
+  padding: 0px;
+  overflow: hidden;
+  text-align: center;
+  background: #fafafa;
+  border: 0px solid #ebedf0;
+  border-radius: 2px;
+`;
+
+export const UIMidBody = styled.div`
+  display: flex;
+`;
+
+export const UILeftArea = styled.div`
+  width: 40%;
+`;
+
+export const UIRightArea = styled.div`
+  width: 60%;
+  position: relative;
+  padding-left: 5px;
+  overflow: hidden;
+  text-align: center;
+  background: #fafafa;
+  border: 0px solid #ebedf0;
+  border-radius: 2px;
 `;
