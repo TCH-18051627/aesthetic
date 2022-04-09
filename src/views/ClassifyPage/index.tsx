@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   List,
-  Card,
   Upload,
   message,
   Modal,
@@ -12,7 +11,6 @@ import {
   Button,
   Input,
   Tag,
-  Tooltip,
   Pagination
 } from 'antd';
 import {
@@ -20,8 +18,8 @@ import {
   DownloadOutlined,
   PlusOutlined
 } from '@ant-design/icons';
-import { imageTags, imgScore, attrList } from './testData/data';
-import { ImageAttributesType } from './interface';
+import { imageTags, attrList } from './testData/data';
+// import { ImageAttributesType } from './interface';
 import { getBase64 } from './util';
 import testImage from '@/assets/images/459416_CC_Macro_DOF.jpg';
 
@@ -47,14 +45,23 @@ import {
   UIImgCol,
   UIHover,
   UIHoverText,
-  UIPaginationWrap
+  UIPaginationWrap,
+  UISubmitButton,
+  UITextAreaWrap,
+  UITextAreaStyle,
+  UITestImgWrap,
+  UITestImg,
+  UIDrawerText,
+  UIExampleArea,
+  UIRightArea,
+  UILeftArea,
+  UIMidBody
 } from './style';
 // import { getlabelColor } from '@/utils/valid';
 
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
 const { TextArea } = Input;
-const { Header, Footer, Sider, Content } = Layout;
 
 export default function ClassifyPage() {
   // 遮罩层的开关state
@@ -241,6 +248,28 @@ export default function ClassifyPage() {
     );
   };
 
+  const DrawerBlock = () => {
+    return (
+      <Drawer
+        title="风格识别结果"
+        placement="right"
+        closable={false}
+        onClose={() => {
+          setdrawerVisible(false);
+        }}
+        visible={drawerVisible}
+        getContainer={false}
+        style={{ position: 'absolute', opacity: '0.7' }}
+        maskStyle={{ backgroundColor: 'transparent' }}
+        contentWrapperStyle={{ width: '250px' }}
+      >
+        <UIDrawerText>Complementray Colors</UIDrawerText>
+        <UIDrawerText>Macro</UIDrawerText>
+        <UIDrawerText>Shadow DOF</UIDrawerText>
+      </Drawer>
+    );
+  };
+
   const ImageTabList = () => {
     return (
       <UIImageTabs type="card" size="large">
@@ -355,24 +384,17 @@ export default function ClassifyPage() {
                   </Tag>
                 )}
               </div>
-              <div style={{ padding: '8px' }}>
+              <UITextAreaWrap>
                 <TextArea
-                  style={{ height: '300px', width: '800px' }}
+                  style={UITextAreaStyle}
                   rows={4}
                   placeholder="补充风格标签纠错具体理由"
                   maxLength={6}
                 />
-                <div
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'end',
-                    marginTop: '2px'
-                  }}
-                >
+                <UISubmitButton>
                   <Button type="primary">提交</Button>
-                </div>
-              </div>
+                </UISubmitButton>
+              </UITextAreaWrap>
             </UIImgWrap>
           </UIImgCol>
         </TabPane>
@@ -383,68 +405,21 @@ export default function ClassifyPage() {
   return (
     <>
       <UIListHeader header={UploadHeader()} bordered dataSource={['1']} />
-      <Layout>
-        <Content>
-          <Card
-            style={{
-              position: 'relative',
-              padding: '0px',
-              overflow: 'hidden',
-              textAlign: 'center',
-              background: '#fafafa',
-              border: '0px solid #ebedf0',
-              borderRadius: '2px',
-              height: '100%'
-            }}
-            bodyStyle={{ padding: '0px' }}
-          >
-            <div
+      <UIMidBody>
+        <UILeftArea>
+          <UIExampleArea>
+            <UITestImgWrap
               onClick={() => {
                 setdrawerVisible(true);
               }}
-              style={{ height: '100%', width: '100%' }}
             >
-              <img
-                src={testImage}
-                style={{ height: '100%', width: '100%', objectFit: 'cover' }}
-              />
-            </div>
-            <Drawer
-              title="风格识别结果"
-              placement="right"
-              closable={false}
-              onClose={() => {
-                setdrawerVisible(false);
-              }}
-              visible={drawerVisible}
-              getContainer={false}
-              style={{ position: 'absolute', opacity: '0.7' }}
-              maskStyle={{ backgroundColor: 'transparent' }}
-              contentWrapperStyle={{ width: '250px' }}
-            >
-              <p style={{ fontSize: '18px' }}>Complementray Colors</p>
-              <p style={{ fontSize: '18px' }}>Macro</p>
-              <p style={{ fontSize: '18px' }}>Shadow DOF</p>
-            </Drawer>
-          </Card>
-        </Content>
-        <Sider
-          width="60%"
-          style={{
-            position: 'relative',
-            padding: '10px',
-            paddingTop: '0px',
-            overflow: 'hidden',
-            textAlign: 'center',
-            background: '#fafafa',
-            border: '0px solid #ebedf0',
-            borderRadius: '2px'
-          }}
-        >
-          {' '}
-          {ImageTabList()}
-        </Sider>
-      </Layout>
+              <UITestImg src={testImage} />
+            </UITestImgWrap>
+            {DrawerBlock()}
+          </UIExampleArea>
+        </UILeftArea>
+        <UIRightArea>{ImageTabList()}</UIRightArea>
+      </UIMidBody>
       <UICollapse>
         {/* <List
           bordered
