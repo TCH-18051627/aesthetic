@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import {
-  List,
   Upload,
   message,
   Modal,
   Collapse,
   Tabs,
-  Layout,
   Drawer,
   Button,
   Input,
@@ -18,8 +16,8 @@ import {
   DownloadOutlined,
   PlusOutlined
 } from '@ant-design/icons';
+import Loading from '@/components/Loading';
 import { imageTags, attrList } from './testData/data';
-// import { ImageAttributesType } from './interface';
 import { getBase64 } from './util';
 import testImage from '@/assets/images/459416_CC_Macro_DOF.jpg';
 
@@ -57,7 +55,6 @@ import {
   UILeftArea,
   UIMidBody
 } from './style';
-// import { getlabelColor } from '@/utils/valid';
 
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
@@ -65,22 +62,23 @@ const { TextArea } = Input;
 
 export default function ClassifyPage() {
   // 遮罩层的开关state
-  const [previewVisible, setpreviewVisible] = useState<boolean>(false);
-  // 遮罩层打开后显示的图片
+  // const [previewVisible, setpreviewVisible] = useState<boolean>(false);
+  // 预览图片及上传图片
   const [previewImage, setpreviewImage] = useState<string>('');
-  // 遮罩层打开后显示的标题
-  const [previewTitle, setpreviewTitle] = useState<string>('');
   // 上传图片左侧弹出的列表 默认number[]
   const [fileList, setFileList] = useState([]);
-  // 上传后回显至下方的图像分类列表
-  const [classifyImgList, setClassifyImgList] = useState([]);
+  // 上传后回显至样例模块的分类列表
+  const [resList, setResList] = useState<string[]>(imageTags);
+  // 上传后回显至页面的图像
   // 上传中...加载状态.....
   const [upImgloading, setUpImgloading] = useState<boolean>(false);
 
   // 图片数据分页初始index
   const [preIndex, setPreIndex] = useState<number>(0);
   // 图片数据分页结尾index
-  const [nextIndex, setNextIndex] = useState<number>(15);
+  const [nextIndex, setNextIndex] = useState<number>(11);
+  // 当前页数
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const [drawerVisible, setdrawerVisible] = useState<boolean>(false);
 
@@ -91,8 +89,12 @@ export default function ClassifyPage() {
   const [tagInputValue, setTagInputValue] = useState<string>('');
   const tagRef = useRef();
 
+  const placedImage = useMemo(() => {
+    return !previewImage ? testImage : previewImage;
+  }, [previewImage]);
+
   // 判断上传图片拦截方法
-  const handleChange = ({ file, fileList }: any) => {
+  const handleUploadChange = async ({ file, fileList }: any) => {
     // { file, fileList }
     // 看官方文档 第一个 file 获取上传文件信息
     // 第二个 fileList 获取的是当前上传成功的图片对象
@@ -105,13 +107,10 @@ export default function ClassifyPage() {
       return isJpgOrPng;
     }
 
-    // 判断图片大小是否小于等于50k
-    // 1默认为bit 最小单位
-    // 1k = 1b * 624 b
-    // 1m = 1k * 624 k
-    const isLt50K = file.size <= 50 * 624;
+    // 判断图片大小是否小于等于1MB
+    const isLt50K = file.size <= 1024 * 624 * 8;
     if (!isLt50K) {
-      message.error('文件大小不得超过50k!');
+      message.error('文件大小不得超过1MB!');
       return isLt50K;
     }
 
@@ -124,50 +123,58 @@ export default function ClassifyPage() {
       if (file.status === 'uploading') {
         // 则上传按钮加载中.....
         setUpImgloading(true);
+        if (!file.url && !file.preview) {
+          // 这里是调用本地弹窗获取本地图片路径 并且上传到file 原型链中
+          // 预览的图片 调用异步方法 getBase64 获取到文件详情
+          file.preview = await getBase64(file.originFileObj);
+        }
+        // state存放当前上传图片的地址 或者 图片的预览地址
+        setpreviewImage(file.url || file.preview);
         return;
       }
       // 如果上传状态为done
       if (file.status === 'done') {
         // 则上传按钮加载完成
         setUpImgloading(false);
-        // 获取上传图片头部url + 图片路径地址
-        // const url =
-        //   'http://rap2api.taobao.org/app/mock/280998/api/uploadClassifyImage/' +
-        //   file.response.data.imgList?.[0].url;
-        // // 这里如果表单形式 可以用form回填
-        // console.info(url);
-        setClassifyImgList(file.response.attrList);
+        setResList(file.response.attrList.split(','));
       }
     }
   };
 
   //   点击上传时触发事件函数
-  const handlePreview = async (file: any) => {
-    // 点击获取本地弹窗 并且获取本地待上传的文件路径
-    if (!file.url && !file.preview) {
-      // 这里是调用本地弹窗获取本地图片路径 并且上传到file 原型链中
-      // 预览的图片 调用异步方法 getBase64 获取到文件详情
-      file.preview = await getBase64(file.originFileObj);
-    }
+  // const handlePreview = async (file: any) => {
+  //   // 点击获取本地弹窗 并且获取本地待上传的文件路径
+  //   if (!file.url && !file.preview) {
+  //     // 这里是调用本地弹窗获取本地图片路径 并且上传到file 原型链中
+  //     // 预览的图片 调用异步方法 getBase64 获取到文件详情
+  //     file.preview = await getBase64(file.originFileObj);
+  //   }
 
-    // state存放当前上传图片的地址 或者 图片的预览地址
-    setpreviewImage(file.url || file.preview);
-    // 是否显示模态框
-    setpreviewVisible(true);
-    // 模态框标题名字
-    setpreviewTitle(
-      file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
-    );
-  };
+  //   // state存放当前上传图片的地址 或者 图片的预览地址
+  //   setpreviewImage(file.url || file.preview);
+  //   // 是否显示模态框
+  //   setpreviewVisible(true);
+  //   // 模态框标题名字
+  //   setpreviewTitle(
+  //     file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
+  //   );
+  // };
 
   const handlePageChange = (value: number) => {
+    setCurrentPage(value);
     if (value <= 1) {
       setPreIndex(0);
-      setNextIndex(15);
+      setNextIndex(11);
     } else {
-      setPreIndex((value - 1) * 15);
-      setNextIndex((value - 1) * 15 + 15);
+      setPreIndex((value - 1) * 11);
+      setNextIndex((value - 1) * 11 + 11);
     }
+  };
+
+  const handleTagTabsChange = () => {
+    setCurrentPage(1);
+    setPreIndex(0);
+    setNextIndex(11);
   };
 
   const handleEditInputConfirm = () => {
@@ -198,20 +205,19 @@ export default function ClassifyPage() {
           <Upload
             name="classify"
             // 图片上传服务器地址
-            // action="http://rap2api.taobao.org/app/mock/280998/api/uploadClassifyImage"
             action="/uploadClassifyImage"
             // 图片上传类型
             // listType="picture-card"
             // 上传列表
             fileList={fileList}
             // 点击触发遮罩层方法 更新遮罩层 图片以及标题
-            onPreview={handlePreview}
+            // onPreview={handlePreview}
             // 点击触发上传图片方法 判断格式 以及 文件大小 并且 更新上传图片
-            onChange={handleChange}
+            onChange={handleUploadChange}
             // 本地弹窗获取本地图片时 可获取的后缀
             accept=".jpg,.jpeg,.png"
-            // 可选中多条数据上传
-            multiple={true}
+            // 不显示文件列表
+            showUploadList={false}
           >
             <UploadButton icon={<UploadOutlined />}>上传图像</UploadButton>
           </Upload>
@@ -232,7 +238,7 @@ export default function ClassifyPage() {
             导出为Excel
           </UIExportButton>
         </>
-        <Modal
+        {/* <Modal
           // 模态框是否显示
           visible={previewVisible}
           // 模态框标题
@@ -242,9 +248,8 @@ export default function ClassifyPage() {
           // 模态框点击右上角关闭模态框
           onCancel={() => setpreviewVisible(false)}
         >
-          {/* 模态框打开后显示当前点击的图片 */}
           <UIpreviewImg alt="example" src={previewImage} />
-        </Modal>
+        </Modal> */}
       </UploadWrap>
     );
   };
@@ -264,16 +269,16 @@ export default function ClassifyPage() {
         maskStyle={{ backgroundColor: 'transparent' }}
         contentWrapperStyle={{ width: '250px' }}
       >
-        <UIDrawerText>Complementray Colors</UIDrawerText>
-        <UIDrawerText>Macro</UIDrawerText>
-        <UIDrawerText>Shadow DOF</UIDrawerText>
+        {resList.map(attr => (
+          <UIDrawerText key={attr}>{attr}</UIDrawerText>
+        ))}
       </Drawer>
     );
   };
 
   const ImageTabList = () => {
     return (
-      <UIImageTabs type="card" size="large">
+      <UIImageTabs type="card" size="large" onChange={handleTagTabsChange}>
         {attrList.map(item => (
           <TabPane tab={item.label} key={item.attrId}>
             <UIImgPageWrap>
@@ -292,8 +297,9 @@ export default function ClassifyPage() {
               <UIPaginationWrap>
                 <Pagination
                   size="small"
+                  current={currentPage}
                   defaultCurrent={1}
-                  defaultPageSize={15}
+                  defaultPageSize={11}
                   onChange={handlePageChange}
                   total={item.imageList.length}
                   showSizeChanger
@@ -409,48 +415,19 @@ export default function ClassifyPage() {
       <UIMidBody>
         <UILeftArea>
           <UIExampleArea>
+            {upImgloading ? <Loading /> : <></>}
             <UITestImgWrap
               onClick={() => {
                 setdrawerVisible(true);
               }}
             >
-              <UITestImg src={testImage} />
+              <UITestImg src={placedImage} />
             </UITestImgWrap>
             {DrawerBlock()}
           </UIExampleArea>
         </UILeftArea>
         <UIRightArea>{ImageTabList()}</UIRightArea>
       </UIMidBody>
-      {/* <UICollapse>
-        <Panel header="图像分类结果" key="2">
-          <List
-            bordered
-            dataSource={classifyImgList}
-            style={UIListBodyStyle}
-            grid={{ gutter: 16, column: 3 }}
-            renderItem={(item: ImageAttributesType) => (
-              <List.Item key={item.imageId} style={UIListItemStyle}>
-                <Card>
-                  <UILineWrap>
-                    <UIdisplayImg src={item.imageUrl} />
-                    <UIChartsWrap>
-                      {item.aestheticAttributes.map(attr => (
-                        <UIAttriButeTag
-                          key={Math.random().toString(36).slice(-6)}
-                          color={getlabelColor(attr.label)}
-                        >
-                          {attr.label}
-                        </UIAttriButeTag>
-                      ))}
-                    </UIChartsWrap>
-                  </UILineWrap>
-                </Card>
-              </List.Item>
-            )}
-          />
-        </Panel>
-      </UICollapse>
-      {ImageTabList()} */}
     </>
   );
 }

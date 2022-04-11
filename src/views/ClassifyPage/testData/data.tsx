@@ -9,6 +9,17 @@ import image8 from '@/assets/images/CC_8.jpg';
 import image9 from '@/assets/images/CC_9.jpg';
 import image10 from '@/assets/images/CC_10.jpg';
 import image11 from '@/assets/images/CC_11.jpg';
+import MA1 from '@/assets/images/MA_1.jpg';
+import MA2 from '@/assets/images/MA_2.jpg';
+import MA3 from '@/assets/images/MA_3.jpg';
+import MA4 from '@/assets/images/MA_4.jpg';
+import MA5 from '@/assets/images/MA_5.jpg';
+import MA6 from '@/assets/images/MA_6.jpg';
+import MA7 from '@/assets/images/MA_7.jpg';
+import MA8 from '@/assets/images/MA_8.jpg';
+import MA9 from '@/assets/images/MA_9.jpg';
+import MA10 from '@/assets/images/MA_10.jpg';
+import MA11 from '@/assets/images/MA_11.jpg';
 
 export const imageTags = ['Complementary Colors', 'Macro', 'Shadow DOF'];
 
@@ -97,30 +108,30 @@ export const attrList = [
     label: 'Macro',
     attrId: '1',
     imageList: [
-      { imgUrl: image1, id: '0' },
-      { imgUrl: image2, id: '1' },
-      { imgUrl: image4, id: '2' },
-      { imgUrl: image3, id: '3' },
-      { imgUrl: image6, id: '4' },
-      { imgUrl: image5, id: '5' },
-      { imgUrl: image6, id: '6' },
-      { imgUrl: image2, id: '7' },
-      { imgUrl: image1, id: '8' },
-      { imgUrl: image3, id: '9' },
-      { imgUrl: image5, id: '10' },
-      { imgUrl: image4, id: '11' },
-      { imgUrl: image1, id: '12' },
-      { imgUrl: image2, id: '13' },
-      { imgUrl: image4, id: '14' },
-      { imgUrl: image3, id: '15' },
-      { imgUrl: image6, id: '16' },
-      { imgUrl: image5, id: '17' },
-      { imgUrl: image6, id: '18' },
-      { imgUrl: image2, id: '19' },
-      { imgUrl: image1, id: '20' },
-      { imgUrl: image3, id: '21' },
-      { imgUrl: image5, id: '22' },
-      { imgUrl: image4, id: '23' }
+      { imgUrl: MA1, id: '0' },
+      { imgUrl: MA2, id: '1' },
+      { imgUrl: MA3, id: '2' },
+      { imgUrl: MA4, id: '3' },
+      { imgUrl: MA5, id: '4' },
+      { imgUrl: MA6, id: '5' },
+      { imgUrl: MA7, id: '6' },
+      { imgUrl: MA8, id: '7' },
+      { imgUrl: MA9, id: '8' },
+      { imgUrl: MA10, id: '9' },
+      { imgUrl: MA11, id: '10' },
+      { imgUrl: MA1, id: '11' },
+      { imgUrl: MA3, id: '12' },
+      { imgUrl: MA2, id: '13' },
+      { imgUrl: MA4, id: '14' },
+      { imgUrl: MA6, id: '15' },
+      { imgUrl: MA5, id: '16' },
+      { imgUrl: MA9, id: '17' },
+      { imgUrl: MA7, id: '18' },
+      { imgUrl: MA10, id: '19' },
+      { imgUrl: MA8, id: '20' },
+      { imgUrl: MA9, id: '21' },
+      { imgUrl: MA11, id: '22' },
+      { imgUrl: MA1, id: '23' }
     ]
   },
   {

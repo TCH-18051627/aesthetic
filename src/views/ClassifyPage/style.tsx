@@ -188,7 +188,7 @@ export const UITestImgWrap = styled.div`
 `;
 
 export const UITestImg = styled.img`
-  height: 100%;
+  width: 100%;
   object-fit: cover;
 `;
 
@@ -212,6 +212,7 @@ export const UIMidBody = styled.div`
 
 export const UILeftArea = styled.div`
   width: 40%;
+  position: relative;
 `;
 
 export const UIRightArea = styled.div`

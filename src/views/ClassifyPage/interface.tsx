@@ -11,14 +11,6 @@ export interface AttributesLabelType {
   color?: string;
 }
 
-export interface ImageAttributesType {
-  imageId: string;
-  imageUrl: string;
-  aestheticScores: AestheticScoreType;
-  aestheticDistributions: number[];
-  aestheticAttributes: AttributesLabelType[];
-}
-
 export interface AttrImgListType {
   label: string;
   attrId: string;
