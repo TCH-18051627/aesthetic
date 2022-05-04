@@ -1,7 +1,7 @@
+import storage from 'good-storage';
+import React from 'react';
 // 使用local-storage存储历史搜索相关数据
 // 需要长期存储的业务数据需要使用本地local-storage
-import storage from 'good-storage';
-import React, { ReactNode, LazyExoticComponent } from 'react';
 
 export function save(item, key, compare, maxLen) {
   // 读出现有元素,如果没有存储过key,默认空数组[]
@@ -66,23 +66,36 @@ export enum CurPageTypeEnum {
   CLASSIFY = '图像美学分类'
 }
 
-export const getCurPageTitle = (curPath: string) => {
-  const pageNameList = [
-    { key: '/', title: '个人中心' },
-    { key: '/user', title: '个人中心' },
-    { key: '/community', title: '社区' },
-    { key: '/evaluate', title: '图像美学评价' },
-    { key: '/generation', title: '美学图像生成' },
-    { key: '/enhance', title: '图像美学增强' },
-    { key: '/classify', title: '图像美学分类' },
-    { key: '/dataset', title: '美学风格数据集管理' }
-  ];
+export const pageNameList = [
+  { key: '/', title: '个人中心' },
+  { key: '/user', title: '个人中心' },
+  { key: '/community', title: '社区' },
+  { key: '/evaluate', title: '图像美学评价' },
+  { key: '/generation', title: '美学图像生成' },
+  { key: '/enhance', title: '图像美学增强' },
+  { key: '/classify', title: '图像美学分类' },
+  { key: '/dataset', title: '美学风格数据集管理' }
+];
 
+export const attrLabels = [
+  'Complementary Colors',
+  'Light On White',
+  'Macro',
+  'Negative Image',
+  'Rule of Thirds',
+  'Vanishing Point'
+];
+
+export const getCurPageTitle = (curPath: string) => {
   const curIndex = pageNameList.findIndex(item => {
     return item.key === curPath;
   });
 
   return pageNameList[curIndex].title;
+};
+
+export const getAttrLabels = (attrIdx: number[]) => {
+  return attrIdx.map(idx => attrLabels[idx]);
 };
 
 export const lazyLoad = (

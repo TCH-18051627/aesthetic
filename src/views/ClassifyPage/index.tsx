@@ -55,6 +55,7 @@ import {
   UILeftArea,
   UIMidBody
 } from './style';
+import { getAttrLabels } from '@/utils/valid';
 
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
@@ -136,7 +137,7 @@ export default function ClassifyPage() {
       if (file.status === 'done') {
         // 则上传按钮加载完成
         setUpImgloading(false);
-        setResList(file.response.attrList.split(','));
+        setResList(getAttrLabels(file.response.attrList));
       }
     }
   };
