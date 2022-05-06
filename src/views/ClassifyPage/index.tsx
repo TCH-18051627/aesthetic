@@ -137,7 +137,7 @@ export default function ClassifyPage() {
       if (file.status === 'done') {
         // 则上传按钮加载完成
         setUpImgloading(false);
-        setResList(getAttrLabels(file.response.attrList));
+        setResList(file.response.attrList);
       }
     }
   };
