@@ -21,7 +21,7 @@ export default function TopTabs() {
 
   const onTabChanged = (key?: string) => {
     setState(key);
-    key !== 'evaluate' && navigate(key || '');
+    navigate(key || '');
   };
 
   const onMenuClick = (props?: MenuInfo) => {
@@ -68,7 +68,15 @@ export default function TopTabs() {
         </CommunityTab>
       )
     },
-    { key: 'evaluate', tabNode: DropdownList },
+    {
+      key: 'algorithm',
+      tabNode: (
+        <AlgorithmTab>
+          <AlgorithmIcon className="iconfont icon-suanfa2" />
+          算法服务
+        </AlgorithmTab>
+      )
+    },
     {
       key: 'user',
       tabNode: (
@@ -77,16 +85,16 @@ export default function TopTabs() {
           个人中心
         </UserCenterTab>
       )
-    },
-    {
-      key: 'dataset',
-      tabNode: (
-        <UserCenterTab>
-          <UserCenterIcon className="iconfont icon-generation" />
-          数据集管理
-        </UserCenterTab>
-      )
     }
+    // {
+    //   key: 'dataset',
+    //   tabNode: (
+    //     <UserCenterTab>
+    //       <UserCenterIcon className="iconfont icon-generation" />
+    //       数据集管理
+    //     </UserCenterTab>
+    //   )
+    // }
   ];
 
   return (

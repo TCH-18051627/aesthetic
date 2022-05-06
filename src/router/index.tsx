@@ -66,7 +66,7 @@ export const routes: RouteProps[] = [
     element: lazyLoad(lazy(() => import('@/views/EnhancePage')))
   },
   {
-    path: '/classify',
+    path: '/algorithm',
     meta: {
       auth: true,
       roles: [USER_ROLE_ENUM.ADMIN]

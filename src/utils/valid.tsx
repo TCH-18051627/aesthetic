@@ -73,7 +73,7 @@ export const pageNameList = [
   { key: '/evaluate', title: '图像美学评价' },
   { key: '/generation', title: '美学图像生成' },
   { key: '/enhance', title: '图像美学增强' },
-  { key: '/classify', title: '图像美学分类' },
+  { key: '/algorithm', title: '算法服务' },
   { key: '/dataset', title: '美学风格数据集管理' }
 ];
 

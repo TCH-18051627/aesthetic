@@ -211,12 +211,12 @@ export const UIMidBody = styled.div`
 `;
 
 export const UILeftArea = styled.div`
-  width: 40%;
+  width: 30%;
   position: relative;
 `;
 
 export const UIRightArea = styled.div`
-  width: 60%;
+  width: 70%;
   position: relative;
   padding-left: 5px;
   overflow: hidden;

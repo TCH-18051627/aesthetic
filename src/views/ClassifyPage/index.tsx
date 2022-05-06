@@ -19,7 +19,7 @@ import {
 import Loading from '@/components/Loading';
 import { imageTags, attrList } from './testData/data';
 import { getBase64 } from './util';
-import testImage from '@/assets/images/459416_CC_Macro_DOF.jpg';
+import testImage from '@/assets/images/y1.jpg';
 
 import {
   UIListHeader,
@@ -77,7 +77,7 @@ export default function ClassifyPage() {
   // 图片数据分页初始index
   const [preIndex, setPreIndex] = useState<number>(0);
   // 图片数据分页结尾index
-  const [nextIndex, setNextIndex] = useState<number>(11);
+  const [nextIndex, setNextIndex] = useState<number>(10);
   // 当前页数
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -165,17 +165,17 @@ export default function ClassifyPage() {
     setCurrentPage(value);
     if (value <= 1) {
       setPreIndex(0);
-      setNextIndex(11);
+      setNextIndex(10);
     } else {
-      setPreIndex((value - 1) * 11);
-      setNextIndex((value - 1) * 11 + 11);
+      setPreIndex((value - 1) * 10);
+      setNextIndex((value - 1) * 10 + 10);
     }
   };
 
   const handleTagTabsChange = () => {
     setCurrentPage(1);
     setPreIndex(0);
-    setNextIndex(11);
+    setNextIndex(10);
   };
 
   const handleEditInputConfirm = () => {
@@ -258,7 +258,7 @@ export default function ClassifyPage() {
   const DrawerBlock = () => {
     return (
       <Drawer
-        title="风格识别结果"
+        title="识别结果"
         placement="right"
         closable={false}
         onClose={() => {
@@ -268,7 +268,7 @@ export default function ClassifyPage() {
         getContainer={false}
         style={{ position: 'absolute', opacity: '0.7' }}
         maskStyle={{ backgroundColor: 'transparent' }}
-        contentWrapperStyle={{ width: '250px' }}
+        contentWrapperStyle={{ width: '200px' }}
       >
         {resList.map(attr => (
           <UIDrawerText key={attr}>{attr}</UIDrawerText>
@@ -290,7 +290,7 @@ export default function ClassifyPage() {
                     <UIImgWrap key={itemImg.id}>
                       <UIImgItem src={itemImg.imgUrl} />
                       <UIHover>
-                        <UIHoverText className="text">hover效果</UIHoverText>
+                        <UIHoverText className="text">样例</UIHoverText>
                       </UIHover>
                     </UIImgWrap>
                   ))}
@@ -300,7 +300,7 @@ export default function ClassifyPage() {
                   size="small"
                   current={currentPage}
                   defaultCurrent={1}
-                  defaultPageSize={11}
+                  defaultPageSize={10}
                   onChange={handlePageChange}
                   total={item.imageList.length}
                   showSizeChanger
@@ -311,101 +311,6 @@ export default function ClassifyPage() {
             </UIImgPageWrap>
           </TabPane>
         ))}
-        <TabPane tab={'风格标签纠错'} key={'风格标签纠错'}>
-          <UIImgCol>
-            <UIImgWrap>
-              <div style={{ height: '50px', padding: '8px' }}>
-                {imgTags.map((imgTag, index) => {
-                  if (editInputIndex === index) {
-                    return (
-                      <Input
-                        // ref={tagRef}
-                        key={imgTag}
-                        size="small"
-                        className="tag-input"
-                        value={editInputValue}
-                        onChange={e => {
-                          setEditInputValue(e.target.value);
-                        }}
-                        onBlur={handleEditInputConfirm}
-                        onPressEnter={handleEditInputConfirm}
-                      />
-                    );
-                  }
-
-                  const isLongTag = imgTag.length > 20;
-
-                  const tagElem = (
-                    <Tag
-                      className="edit-tag"
-                      style={{ fontSize: '14px' }}
-                      key={imgTag}
-                      closable={index !== 0}
-                      onClose={() => {
-                        const newTags = imgTags.filter(tag => tag !== imgTag);
-                        setImageTags(newTags);
-                      }}
-                    >
-                      <span
-                        onDoubleClick={e => {
-                          if (index !== 0) {
-                            setEditInputIndex(index);
-                            setEditInputValue(imgTag);
-                            e.preventDefault();
-                          }
-                        }}
-                      >
-                        {imgTag}
-                        {/* {isLongTag ? `${imgTag.slice(0, 20)}...` : imgTag} */}
-                      </span>
-                    </Tag>
-                  );
-
-                  return tagElem;
-                })}
-
-                {tagInputVisible && (
-                  <Input
-                    // ref={this.saveInputRef}
-                    type="text"
-                    size="small"
-                    className="tag-input"
-                    value={tagInputValue}
-                    onChange={e => {
-                      setEditInputValue(e.target.value);
-                    }}
-                    onBlur={handleInputConfirm}
-                    onPressEnter={handleInputConfirm}
-                    style={{
-                      width: '78px',
-                      marginRight: '8px',
-                      verticalAlign: 'top'
-                    }}
-                  />
-                )}
-                {!tagInputVisible && (
-                  <Tag
-                    className="site-tag-plus"
-                    onClick={() => setTagInputVisible(true)}
-                  >
-                    <PlusOutlined /> New Tag
-                  </Tag>
-                )}
-              </div>
-              <UITextAreaWrap>
-                <TextArea
-                  style={UITextAreaStyle}
-                  rows={4}
-                  placeholder="补充风格标签纠错具体理由"
-                  maxLength={6}
-                />
-                <UISubmitButton>
-                  <Button type="primary">提交</Button>
-                </UISubmitButton>
-              </UITextAreaWrap>
-            </UIImgWrap>
-          </UIImgCol>
-        </TabPane>
       </UIImageTabs>
     );
   };

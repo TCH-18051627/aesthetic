@@ -15,11 +15,11 @@ export default function UserCenterPage() {
   return (
     <>
       <h1>个人中心</h1>
-      <div>
+      {/* <div>
         用户id: {userInfo.userId + ';'}
         手机号: {userInfo.phoneNumber + ';'}
         邮箱: {userInfo.email + ';'}
-      </div>
+      </div> */}
     </>
   );
 }

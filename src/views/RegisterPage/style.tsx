@@ -14,7 +14,7 @@ export const RegisterButton = styled(Button)`
   display: table;
   margin: 0 auto;
   width: 80%;
-  margin-left:-12%;
+  margin-left: -12%;
 `;
 
 export const PageHead = styled(Menu)`
@@ -23,21 +23,21 @@ export const PageHead = styled(Menu)`
 `;
 
 export const UIFooterWrap = styled.div`
-  margin-top:-20px;
-  margin-left:120px;
+  margin-top: -20px;
+  margin-left: 120px;
 `;
 
 export const FormItem = styled(Form.Item)`
-  margin-left:-10%;
+  margin-left: -10%;
 `;
 
 export const NameItem = styled(Form.Item)`
   margin-top: 20px;
-  margin-left:-10%;
+  margin-left: -10%;
 `;
 
 export const NormalInput = styled(Input)`
-  width:250px;
+  width: 250px;
 `;
 
 export const IntroInput = styled(Input.TextArea)`
@@ -45,8 +45,8 @@ export const IntroInput = styled(Input.TextArea)`
 `;
 
 export const Login = styled(Button)`
-  color:blue;
-  margin-left:-15px;
+  color: blue;
+  margin-left: -15px;
 `;
 
 export const Background = styled.div`

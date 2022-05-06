@@ -59,7 +59,7 @@ export default function Header() {
       <HeaderWrap>
         <FirstLine>
           <LogoIcon className="iconfont icon-photography" />
-          <HeaderTitle>图像美学分析系统</HeaderTitle>
+          <HeaderTitle>杂草识别系统</HeaderTitle>
           <SearchSelectWrap>
             <Button
               icon={<SearchIcon className="iconfont icon-fangdajing" />}

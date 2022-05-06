@@ -100,7 +100,7 @@ export default function LoginPage() {
               const key = index + 1;
               return (
                 <Menu.Item key="1">
-                  <a href="">图像美学系统</a>
+                  <a href="">杂草识别系统</a>
                 </Menu.Item>
               );
             })}
