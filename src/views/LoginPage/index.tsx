@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu, Form } from 'antd';
+import { Layout, Menu, Form, message } from 'antd';
 // import EChartsReact from 'echarts-for-react';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {
@@ -31,7 +31,19 @@ export default function LoginPage() {
   const state: any = location.state;
   const from = state ? state.from : '/';
 
-  const onLoginClick = () => {
+  const onLoginClick = async () => {
+    const sleep = async (interval: number) => {
+      return new Promise(resolve => {
+        setTimeout(resolve, interval);
+      });
+    };
+
+    const hide = message.loading('正在登录', 0);
+    setTimeout(hide, 1500);
+    await sleep(2000);
+    message.success('登录成功', 1);
+    await sleep(1000);
+
     signIn();
     dispatch(setIsLogin(true));
     storage.session.set(LOGIN_KEY, true);
