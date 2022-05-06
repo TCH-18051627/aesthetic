@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Menu, Form, InputNumber } from 'antd';
+import { Layout, Menu, Form, InputNumber, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {
   Background,
@@ -41,6 +41,21 @@ export default function RegisterPage() {
     navigate('/login');
   };
 
+  const onRegisterClick = async () => {
+    const sleep = async (interval: number) => {
+      return new Promise(resolve => {
+        setTimeout(resolve, interval);
+      });
+    };
+
+    const hide = message.loading('正在注册', 0);
+    setTimeout(hide, 1500);
+    await sleep(2000);
+    message.success('注册成功', 1);
+    await sleep(1000);
+    navigate('/login');
+  };
+
   const Demo = () => {
     const onFinish = (values: any) => {
       console.log(values);
@@ -75,13 +90,17 @@ export default function RegisterPage() {
           <InputNumber />
         </FormItem>
         <FormItem name={['user', 'password']} label="密码">
-          <NormalInput />
+          <NormalInput type="password" />
         </FormItem>
         <FormItem name={['user', 'introduction']} label="个人简介">
           <IntroInput />
         </FormItem>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-          <RegisterButton type="primary" htmlType="submit">
+          <RegisterButton
+            type="primary"
+            htmlType="submit"
+            onClick={onRegisterClick}
+          >
             注册
           </RegisterButton>
         </Form.Item>
@@ -104,7 +123,7 @@ export default function RegisterPage() {
               const key = index + 1;
               return (
                 <Menu.Item key="1">
-                  <a href="">图像美学系统</a>
+                  <a href="">杂草识别系统</a>
                 </Menu.Item>
               );
             })}
